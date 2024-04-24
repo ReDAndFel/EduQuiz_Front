@@ -8,6 +8,10 @@
     text-decoration: none;
 }
 
+.selected{
+    background-color: var(--selected-color);
+}
+
 .aside-item a:hover {
     background-color: var(--selected-color);
     cursor: pointer;
