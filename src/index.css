@@ -3,4 +3,10 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+
+  --font-color: #212121;
+  --selected-color: rgb(205, 205, 205);
+  --backgroud-color: #e0e0e0;
+
+  color: var(--font-color);
 }

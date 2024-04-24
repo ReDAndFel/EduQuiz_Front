@@ -1,0 +1,14 @@
+.aside-item a {
+    display: flex;
+    gap: 1em;
+    align-items: center;
+    padding: 0.5em 1em;
+    font-weight: 500;
+    transition: 500ms;
+    text-decoration: none;
+}
+
+.aside-item a:hover {
+    background-color: var(--selected-color);
+    cursor: pointer;
+}

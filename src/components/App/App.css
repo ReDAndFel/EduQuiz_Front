@@ -1,0 +1,14 @@
+.app {
+    gap: 0.5em;
+    height: 100vh;
+    display: grid;
+    grid-template-areas:
+        "aside main main";
+    grid-template-columns: 0.3fr 1fr;
+    background-color: var(--backgroud-color);
+}
+
+aside {
+    grid-area: aside;
+    overflow-y: auto;
+}

@@ -1,0 +1,8 @@
+.aside-menu{
+    padding: 0.5em;
+    border-right: 1px solid var(--selected-color);
+}
+
+.aside-menu ul{
+    list-style: none;
+}
