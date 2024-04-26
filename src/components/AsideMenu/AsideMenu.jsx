@@ -12,13 +12,22 @@ const AsideMenu = () => {
 
     return (
         <nav className="aside-menu">
-            <ul>
-                <AsideItem href="/" selected={selectedItem === 0} onClick={() => handleItemClick(0)}>Inicio</AsideItem>
-                <AsideItem href="/" selected={selectedItem === 1} onClick={() => handleItemClick(1)}>Gestionar examenes</AsideItem>
-                <AsideItem href="/" selected={selectedItem === 2} onClick={() => handleItemClick(2)}>Gestionar preguntas</AsideItem>
-                <AsideItem href="/" selected={selectedItem === 3} onClick={() => handleItemClick(3)}>Gestionar bancos de pregunta</AsideItem>
-                <AsideItem href="/" selected={selectedItem === 4} onClick={() => handleItemClick(4)}>Responder examenes</AsideItem>
-            </ul>
+            <div className="aside-menu-section">
+                <h2>Menú profesores</h2>
+                <ul>
+                    <AsideItem href="/gestionar-examen" selected={selectedItem === 0} onClick={() => handleItemClick(0)}>Gestionar examenes</AsideItem>
+                    <AsideItem href="/gestionar-preguntas" selected={selectedItem === 1} onClick={() => handleItemClick(1)}>Gestionar preguntas</AsideItem>
+                    <AsideItem href="/asignacion-examanes" selected={selectedItem === 2} onClick={() => handleItemClick(2)}>Asignacion de examenes</AsideItem>
+                </ul>
+            </div>
+
+            <div className="aside-menu-section">
+                <h2>Menú estudiantes</h2>
+                <ul>
+                    <AsideItem href="/examenes" selected={selectedItem === 3} onClick={() => handleItemClick(3)}>Examenes</AsideItem>
+                </ul>
+            </div>
+
         </nav>
     )
 }

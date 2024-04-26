@@ -1,6 +1,9 @@
 .aside-menu{
     padding: 0.5em;
     border-right: 1px solid var(--selected-color);
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
 }
 
 .aside-menu ul{
