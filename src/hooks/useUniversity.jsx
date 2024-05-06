@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 
 export const useUniversity = () => {
-    const [universities, setUniversities] = useState([]);
-    const [selectedUniversity, setSelectedUniversity] = useState('');
+    const [universities, setUniversities] = useState([])
+    const [selectedUniversity, setSelectedUniversity] = useState('')
 
     useEffect(() => {
         // Aquí harías la petición a la base de datos para obtener los cursos
         const getUniversities = async () => {
-            // const respuesta = await fetch('/universidades');
-            //const datos = await respuesta.json();
+            // const respuesta = await fetch('/universidades')
+            //const datos = await respuesta.json()
             const data = [
                 {
                     id: 1,
@@ -19,14 +19,14 @@ export const useUniversity = () => {
                     descripcion: "Universidad Gran Colombia"
                 }
             ]
-            setUniversities(data);
+            setUniversities(data)
         };
-        getUniversities();
+        getUniversities()
     }, []);
 
     const handleChangeUniversity = (e) => {
-        setSelectedUniversity(e.target.value);
-    };
+        setSelectedUniversity(e.target.value)
+    }
 
     return { universities, handleChangeUniversity, selectedUniversity }
 }
