@@ -4,7 +4,7 @@ import { useCourse } from "../../hooks/useCourse";
 import { useUniversity } from "../../hooks/useUniversity";
 import { useGroup } from "../../hooks/useGroup";
 import { useTopic } from "../../hooks/useTopic";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const ExamManagement = () => {
     const { universities, handleChangeUniversity, selectedUniversity } = useUniversity()
@@ -12,11 +12,18 @@ const ExamManagement = () => {
     const { groups, handleChangeGroup, selectedGroup } = useGroup()
     const { topics, handleChangeTopic, selectedTopic } = useTopic()
     const navigate = useNavigate()
+    const { state } = useLocation();
+
+    const handleClickNext = (e) => {
+        navigate('/preguntas', { state: { selectedUniversity, selectedCourse, selectedGroup, selectedTopic } })
+    }
+
 
     return (
         <div className="exam-management-container">
-            <h1>Gestionar examanes</h1>
+            <h1>Crear examen</h1>
             <form className="form" action="">
+                <input type="text" name="title" placeholder="Titulo del examen" />
                 <div className="combobox">
                     <label>Universidad</label>
                     <SelectComponent
@@ -59,7 +66,7 @@ const ExamManagement = () => {
 
                     />
                 </div>
-                <button disabled={selectedTopic != "" ? false : true} onClick={() => navigate("/preguntas")}>Siguiente</button>
+                <button disabled={selectedTopic != "" ? false : true} onClick={() => handleClickNext()}>Siguiente</button>
             </form>
         </div>
     )

@@ -4,6 +4,7 @@ import AsideMenu from '../AsideMenu/AsideMenu'
 import ExamManagement from '../ExamManagement/ExamManagement'
 import QuestionManagement from '../QuestionManagement/QuestionManagement'
 import Exams from '../Exams/Exams'
+import QuestionForm from '../QuestionForm/QuestionForm'
 
 function App() {
   return (
@@ -17,6 +18,8 @@ function App() {
         <Route path="/preguntas" element={<QuestionManagement />} />
         <Route path="/" element={<ExamManagement />} />
         <Route path="/examenes" element={<Exams />} />
+        <Route path="/agregar-pregunta" element={<QuestionForm />} />
+
       </Routes>
 
     </div>
