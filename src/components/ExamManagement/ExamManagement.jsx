@@ -24,6 +24,7 @@ const ExamManagement = () => {
                         onChange={handleChangeUniversity}
                         defaultValue={selectedUniversity}
                         firstOption="Seleccione una universidad"
+                        disable={false}
                     />
                 </div>
                 <div className="combobox">
@@ -33,6 +34,7 @@ const ExamManagement = () => {
                         onChange={handleChangeCourse}
                         defaultValue={selectedCourse}
                         firstOption="Seleccione un curso"
+                        disabled={selectedUniversity != "" ? false : true}
                     />
                 </div>
                 <div className="combobox">
@@ -42,6 +44,8 @@ const ExamManagement = () => {
                         onChange={handleChangeGroup}
                         defaultValue={selectedGroup}
                         firstOption="Seleccione un grupo"
+                        disabled={selectedCourse != "" ? false : true}
+
                     />
                 </div>
                 <div className="combobox">
@@ -51,9 +55,11 @@ const ExamManagement = () => {
                         onChange={handleChangeTopic}
                         defaultValue={selectedTopic}
                         firstOption="Seleccione un tema"
+                        disabled={selectedGroup != "" ? false : true}
+
                     />
                 </div>
-                <button onClick={()=>navigate("/preguntas")}>Siguiente</button>
+                <button disabled={selectedTopic != "" ? false : true} onClick={() => navigate("/preguntas")}>Siguiente</button>
             </form>
         </div>
     )
