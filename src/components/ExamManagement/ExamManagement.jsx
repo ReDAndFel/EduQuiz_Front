@@ -2,6 +2,7 @@ import SelectComponent from "../SelectComponent/SelectComponent";
 import "./ExamManagement.css"
 import { useCourse } from "../../hooks/useCourse";
 import { useUniversity } from "../../hooks/useUniversity";
+import { useGroup } from "../../hooks/useGroup";
 
 const ExamManagement = () => {
     const { universities, handleChangeUniversity, selectedUniversity } = useUniversity()
