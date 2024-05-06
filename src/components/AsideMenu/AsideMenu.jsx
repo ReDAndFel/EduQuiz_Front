@@ -16,8 +16,6 @@ const AsideMenu = () => {
                 <h2>Menú profesores</h2>
                 <ul>
                     <AsideItem href="/gestionar-examen" selected={selectedItem === 0} onClick={() => handleItemClick(0)}>Gestionar examenes</AsideItem>
-                    <AsideItem href="/gestionar-preguntas" selected={selectedItem === 1} onClick={() => handleItemClick(1)}>Gestionar preguntas</AsideItem>
-                    <AsideItem href="/asignacion-examanes" selected={selectedItem === 2} onClick={() => handleItemClick(2)}>Asignacion de examenes</AsideItem>
                 </ul>
             </div>
 

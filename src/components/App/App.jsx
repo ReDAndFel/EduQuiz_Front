@@ -16,8 +16,6 @@ function App() {
       <Routes>
         <Route path="/gestionar-examen" element={<ExamManagement />} />
         <Route path="/" element={<ExamManagement />} />
-        <Route path="/gestionar-preguntas" element={<QuestionManagement />} />
-        <Route path="/asignacion-examanes" element={<ExamAssignment />} />
         <Route path="/examenes" element={<Exams />} />
       </Routes>
 
