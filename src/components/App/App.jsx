@@ -3,7 +3,6 @@ import './App.css'
 import AsideMenu from '../AsideMenu/AsideMenu'
 import ExamManagement from '../ExamManagement/ExamManagement'
 import QuestionManagement from '../QuestionManagement/QuestionManagement'
-import ExamAssignment from '../ExamAssignment/ExamAssignment'
 import Exams from '../Exams/Exams'
 
 function App() {
@@ -15,6 +14,7 @@ function App() {
 
       <Routes>
         <Route path="/gestionar-examen" element={<ExamManagement />} />
+        <Route path="/preguntas" element={<QuestionManagement />} />
         <Route path="/" element={<ExamManagement />} />
         <Route path="/examenes" element={<Exams />} />
       </Routes>
