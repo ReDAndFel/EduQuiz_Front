@@ -4,29 +4,29 @@ export const useCourse = () => {
     const [courses, setCourses] = useState([])
     const [selectedCourse, setSelectedCourse] = useState('')
 
-    useEffect(() => {
-        // Aquí harías la petición a la base de datos para obtener los cursos
-        const getCourses = async () => {
-            // const respuesta = await fetch('/cursos')
-            //const datos = await respuesta.json()
-            const data = [
-                {
-                    id: 1,
-                    descripcion: "Bases de datos"
-                },
-                {
-                    id: 2,
-                    descripcion: "Programacion en la nube"
-                }
-            ]
-            setCourses(data)
-        };
-        getCourses()
-    }, []);
+
+    // Aquí harías la petición a la base de datos para obtener los cursos
+    const getCourses = async (idInstitution) => {
+        try {
+            const respuesta = await fetch(`http://localhost:8084/cursos/institution/${idInstitution}`);
+            if (!respuesta.ok) {
+                throw new Error('No se pudo completar la solicitud');
+            }
+            const data = await respuesta.json();
+            if (Array.isArray(data.response)) {
+                setCourses(data.response);
+            } else {
+                console.error('La respuesta no contiene un array de cursos:', data);
+            }
+        } catch (error) {
+            console.error('Error al obtener los cursos:', error);
+        }
+    };
+
 
     const handleChangeCourse = (e) => {
         setSelectedCourse(e.target.value)
     }
 
-    return { courses, handleChangeCourse, selectedCourse }
+    return { courses, handleChangeCourse,getCourses, selectedCourse }
 }

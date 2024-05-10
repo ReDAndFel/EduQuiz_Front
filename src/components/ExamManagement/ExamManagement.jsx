@@ -1,22 +1,29 @@
 import SelectComponent from "../SelectComponent/SelectComponent";
 import "./ExamManagement.css"
 import { useCourse } from "../../hooks/useCourse";
-import { useUniversity } from "../../hooks/useUniversity";
-import { useGroup } from "../../hooks/useGroup";
 import { useTopic } from "../../hooks/useTopic";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useInstitution } from "../../hooks/useInstitution";
+import { useEffect } from "react";
 
 const ExamManagement = () => {
-    const { universities, handleChangeUniversity, selectedUniversity } = useUniversity()
-    const { courses, handleChangeCourse, selectedCourse } = useCourse()
-    const { groups, handleChangeGroup, selectedGroup } = useGroup()
-    const { topics, handleChangeTopic, selectedTopic } = useTopic()
+    const { universities, handleChangeUniversity, selectedUniversity } = useInstitution()
+    const { courses,getCourses, handleChangeCourse, selectedCourse } = useCourse()
+    const { topics, handleChangeTopic,getTopics, selectedTopic } = useTopic()
     const navigate = useNavigate()
     const { state } = useLocation();
 
     const handleClickNext = (e) => {
-        navigate('/preguntas', { state: { selectedUniversity, selectedCourse, selectedGroup, selectedTopic } })
+        navigate('/preguntas', { state: { selectedUniversity, selectedCourse, selectedTopic } })
     }
+
+    useEffect(()=>{
+        getCourses(selectedUniversity)
+    },[selectedUniversity])
+
+    useEffect(()=>{
+        getTopics()
+    },[selectedCourse])
 
 
     return (
@@ -32,6 +39,7 @@ const ExamManagement = () => {
                         defaultValue={selectedUniversity}
                         firstOption="Seleccione una universidad"
                         disable={false}
+                        elementValue={"nombreninstitucion"}
                     />
                 </div>
                 <div className="combobox">
@@ -42,19 +50,10 @@ const ExamManagement = () => {
                         defaultValue={selectedCourse}
                         firstOption="Seleccione un curso"
                         disabled={selectedUniversity != "" ? false : true}
+                        elementValue={"nombrecurso"}
                     />
                 </div>
-                <div className="combobox">
-                    <label>Grupo</label>
-                    <SelectComponent
-                        list={groups}
-                        onChange={handleChangeGroup}
-                        defaultValue={selectedGroup}
-                        firstOption="Seleccione un grupo"
-                        disabled={selectedCourse != "" ? false : true}
-
-                    />
-                </div>
+                
                 <div className="combobox">
                     <label>Tema</label>
                     <SelectComponent
@@ -62,7 +61,8 @@ const ExamManagement = () => {
                         onChange={handleChangeTopic}
                         defaultValue={selectedTopic}
                         firstOption="Seleccione un tema"
-                        disabled={selectedGroup != "" ? false : true}
+                        disabled={selectedCourse != "" ? false : true}
+                        elementValue={"nombre"}
 
                     />
                 </div>

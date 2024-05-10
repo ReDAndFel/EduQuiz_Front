@@ -1,32 +1,31 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export const useTopic = () => {
     const [topics, setTopics] = useState([])
     const [selectedTopic, setSelectedTopic] = useState('')
 
-    useEffect(() => {
-        // Aquí harías la petición a la base de datos para obtener los cursos
-        const getTopics = async () => {
-            // const respuesta = await fetch('/universidades')
-            //const datos = await respuesta.json()
-            const data = [
-                {
-                    id: 1,
-                    descripcion: "Introduccion a las bases de datos"
-                },
-                {
-                    id: 2,
-                    descripcion: "PLSQL"
-                }
-            ]
-            setTopics(data)
-        };
-        getTopics()
-    }, []);
+    // Aquí harías la petición a la base de datos para obtener los cursos
+    const getTopics = async () => {
+        try {
+            const respuesta = await fetch('http://localhost:8084/temas/')
+            if (!respuesta.ok) {
+                throw new Error('No se pudo completar la solicitud')
+            }
+            const data = await respuesta.json()
+            if (Array.isArray(data.response)) {
+                setTopics(data.response)
+            } else {
+                console.error('La respuesta no contiene un array de temas:', data)
+            }
+        } catch (error) {
+            console.error('Error al obtener los temas:', error)
+        }
+    }
+
 
     const handleChangeTopic = (e) => {
         setSelectedTopic(e.target.value)
     }
 
-    return { topics, handleChangeTopic, selectedTopic }
+    return { topics, getTopics, handleChangeTopic, selectedTopic }
 }
