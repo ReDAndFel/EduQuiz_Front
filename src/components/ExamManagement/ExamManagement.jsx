@@ -21,7 +21,8 @@ const ExamManagement = () => {
         horaInicio: "",
         horaFin: "",
         idCurso: 0,
-        idTema: 0
+        idTema: 0,
+        preguntas:[]
     });
 
     const handleInputChange = (e) => {
