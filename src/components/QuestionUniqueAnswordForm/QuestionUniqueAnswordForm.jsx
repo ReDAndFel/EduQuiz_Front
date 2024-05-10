@@ -1,11 +1,14 @@
 import { useState } from "react";
 import "./QuestionUniqueAnswordForm.css";
 import { useLocation, useNavigate } from "react-router-dom";
+import SelectComponent from "../SelectComponent/SelectComponent";
+import { useStateQuestion } from "../../hooks/useStateQuestion";
 
 const QuestionUniqueAnswordForm = () => {
     const [statement, setStatement] = useState("");
-    const [answers, setAnswers] = useState([{ opcionrespuesta: "", correcta: "Incorrecta" }]);
+    const [answers, setAnswers] = useState([{ opcionrespuesta: "", correcta: "Incorrecta"}]);
     const navigate = useNavigate();
+    const {states, handleChangeState, selectedState} = useStateQuestion()
     const { state } = useLocation();
     const { data = {} } = state || {};
 
@@ -29,7 +32,7 @@ const QuestionUniqueAnswordForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const newQuestion = { "enunciado": statement, "respuestas": answers };
+        const newQuestion = { "enunciado": statement, "respuestas": answers,"idTema":data.idTema ,"idEstado":selectedState.id };
         const updateForm = {
             ...data,
             preguntas: [...(data.preguntas || []), newQuestion],
@@ -80,8 +83,18 @@ const QuestionUniqueAnswordForm = () => {
                         />
                         Incorrecta
                     </label>
+                   
                 </div>
             ))}
+             <label>Privacidad</label>
+                    <SelectComponent
+                        list={states}
+                        onChange={handleChangeState}
+                        defaultValue={selectedState}
+                        firstOption="Seleccione el estado"
+                        disabled={false}
+                        elementValue={"descripcion"}
+                    />
             <button type="button" onClick={handleAddAnswer}>
                 Agregar respuesta
             </button>

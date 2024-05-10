@@ -51,7 +51,7 @@ const ExamManagement = () => {
     }
 
     useEffect(() => {
-        getCourses(selectedUniversity)
+        getCourses(selectedUniversity.id)
     }, [selectedUniversity])
 
     useEffect(() => {
