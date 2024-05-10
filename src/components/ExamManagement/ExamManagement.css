@@ -6,18 +6,18 @@
     padding: 1em;
 }
 
-.form {
+.exam-management-container form {
     display: flex;
     flex-direction: column;
     gap: 1em;
 }
 
-.combobox {
+.exam-management-container .combobox {
     display: flex;
     flex-direction: column;
     gap: 0.5em;
 }
 
-label {
+.exam-management-container label {
     font-weight: bold;
 }

@@ -21,24 +21,28 @@ const QuestionManagement = () => {
 
     return (
         <div className="question-management-container">
-            <h1>Preguntas</h1>
-            <h3>Titulo:{data.titulo}</h3>
-            <h3>Curso: {data.curso.nombrecurso}</h3>
-            <h3>Tema: {data.tema.nombre}</h3>
+            <h2>Crear preguntas del examen</h2>
+            <p><strong>Titulo: </strong>{data.titulo}</p>
+            <p><strong>Curso: </strong>{data.curso.nombrecurso}</p>
+            <p><strong>Tema: </strong>{data.tema.nombre}</p>
             <div className="questions-container">
+
                 {data.preguntas ? (
-                    data.preguntas.map((question, index) => (
-                        <div key={index} className="question-card">
-                            <h3>{question.enunciado}</h3>
-                            <ol type="A">
-                                {question.respuestas.map((answer, answerIndex) => (
-                                    <li key={answerIndex}>
-                                        {answer.opcionrespuesta}
-                                    </li>
-                                ))}
-                            </ol>
-                        </div>
-                    ))
+                    <ol type="1">
+                        {data.preguntas.map((question, index) => (
+                            <li key={index} className="question-card">
+                                <label>{question.enunciado}</label>
+                                <ol type="A">
+                                    {question.respuestas.map((answer, answerIndex) => (
+                                        <li key={answerIndex}>
+                                            {answer.opcionrespuesta}
+                                        </li>
+                                    ))}
+                                </ol>
+                            </li>
+                        ))}
+                    </ol>
+
                 ) : (
                     <p>No hay preguntas disponibles</p>
                 )}
