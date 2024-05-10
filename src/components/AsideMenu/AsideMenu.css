@@ -1,8 +1,9 @@
 .aside-menu{
     padding: 0.5em;
-    border-right: 1px solid var(--selected-color);
+    border-right: 2px solid var(--selected-color);
     display: flex;
     flex-direction: column;
+    height: 100vh;
     gap: 2em;
 }
 

@@ -8,8 +8,8 @@ import { useEffect } from "react";
 
 const ExamManagement = () => {
     const { universities, handleChangeUniversity, selectedUniversity } = useInstitution()
-    const { courses,getCourses, handleChangeCourse, selectedCourse } = useCourse()
-    const { topics, handleChangeTopic,getTopics, selectedTopic } = useTopic()
+    const { courses, getCourses, handleChangeCourse, selectedCourse } = useCourse()
+    const { topics, handleChangeTopic, getTopics, selectedTopic } = useTopic()
     const navigate = useNavigate()
     const { state } = useLocation();
 
@@ -17,20 +17,38 @@ const ExamManagement = () => {
         navigate('/preguntas', { state: { selectedUniversity, selectedCourse, selectedTopic } })
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         getCourses(selectedUniversity)
-    },[selectedUniversity])
+    }, [selectedUniversity])
 
-    useEffect(()=>{
+    useEffect(() => {
         getTopics()
-    },[selectedCourse])
+    }, [selectedCourse])
 
 
     return (
         <div className="exam-management-container">
             <h1>Crear examen</h1>
             <form className="form" action="">
-                <input type="text" name="title" placeholder="Titulo del examen" />
+                <label>Titulo</label>
+                <input type="text" name="titulo" placeholder="Titulo del examen" />
+                <label>Fecha</label>
+                <input type="date" name="fecha" />
+                <label>Duracion</label>
+                <input type="number" name="duracionExamen" placeholder="Duracion del examen en minutos" />
+                <label>Cantidad total de preguntas</label>
+                <input type="number" name="cantidadPreguntas" placeholder="Cantidad de preguntas totales" />
+                <label>Cantidad de preguntas por estudiante</label>
+                <input type="number" name="cantidadPreguntasXEstudiante" placeholder="Cantidad de preguntas por estudiante" />
+                <label>Calificación maxima</label>
+                <input type="number" name="calificacion" placeholder="Calificacion máxima" />
+                <label>Hora inicio</label>
+                <input type="time" name="horaInicio" />
+                <label>Hora fin</label>
+                <input type="time" name="horaFin" />
+
+
+
                 <div className="combobox">
                     <label>Universidad</label>
                     <SelectComponent
@@ -53,7 +71,7 @@ const ExamManagement = () => {
                         elementValue={"nombrecurso"}
                     />
                 </div>
-                
+
                 <div className="combobox">
                     <label>Tema</label>
                     <SelectComponent
