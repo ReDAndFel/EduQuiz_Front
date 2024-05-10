@@ -4,17 +4,49 @@ import { useCourse } from "../../hooks/useCourse";
 import { useTopic } from "../../hooks/useTopic";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useInstitution } from "../../hooks/useInstitution";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const ExamManagement = () => {
     const { universities, handleChangeUniversity, selectedUniversity } = useInstitution()
     const { courses, getCourses, handleChangeCourse, selectedCourse } = useCourse()
     const { topics, handleChangeTopic, getTopics, selectedTopic } = useTopic()
+
+    const [formData, setFormData] = useState({
+        titulo: "",
+        fecha: "",
+        duracionExamen: "",
+        cantidadPreguntas: "",
+        cantidadPreguntasXEstudiante: "",
+        calificacion: "",
+        horaInicio: "",
+        horaFin: "",
+        idCurso: 0,
+        idTema: 0
+    });
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({
+            ...formData,
+            [name]: value
+        });
+    };
+
     const navigate = useNavigate()
     const { state } = useLocation();
 
     const handleClickNext = (e) => {
-        navigate('/preguntas', { state: { selectedUniversity, selectedCourse, selectedTopic } })
+        e.preventDefault()
+        const updateForm = {
+            ...formData,
+            curso: selectedCourse,
+            tema: selectedTopic,
+            idCurso: selectedCourse.id,
+            idTema: selectedTopic.id
+
+        };
+        console.log(updateForm)
+        navigate('/preguntas', { state: { updateForm } });
     }
 
     useEffect(() => {
@@ -29,25 +61,68 @@ const ExamManagement = () => {
     return (
         <div className="exam-management-container">
             <h1>Crear examen</h1>
-            <form className="form" action="">
+            <form onSubmit={handleClickNext}>
                 <label>Titulo</label>
-                <input type="text" name="titulo" placeholder="Titulo del examen" />
+                <input
+                    type="text"
+                    name="titulo"
+                    placeholder="Titulo del examen"
+                    value={formData.titulo}
+                    onChange={handleInputChange}
+                />
                 <label>Fecha</label>
-                <input type="date" name="fecha" />
+                <input
+                    type="date"
+                    name="fecha"
+                    value={formData.fecha}
+                    onChange={handleInputChange}
+                />
                 <label>Duracion</label>
-                <input type="number" name="duracionExamen" placeholder="Duracion del examen en minutos" />
+                <input
+                    type="number"
+                    name="duracionExamen"
+                    placeholder="Duracion del examen en minutos"
+                    value={formData.duracionExamen}
+                    onChange={handleInputChange}
+                />
                 <label>Cantidad total de preguntas</label>
-                <input type="number" name="cantidadPreguntas" placeholder="Cantidad de preguntas totales" />
+                <input
+                    type="number"
+                    name="cantidadPreguntas"
+                    placeholder="Cantidad de preguntas totales"
+                    value={formData.cantidadPreguntas}
+                    onChange={handleInputChange}
+                />
                 <label>Cantidad de preguntas por estudiante</label>
-                <input type="number" name="cantidadPreguntasXEstudiante" placeholder="Cantidad de preguntas por estudiante" />
-                <label>Calificación maxima</label>
-                <input type="number" name="calificacion" placeholder="Calificacion máxima" />
+                <input
+                    type="number"
+                    name="cantidadPreguntasXEstudiante"
+                    placeholder="Cantidad de preguntas por estudiante"
+                    value={formData.cantidadPreguntasXEstudiante}
+                    onChange={handleInputChange}
+                />
+                <label>Calificación máxima</label>
+                <input
+                    type="number"
+                    name="calificacion"
+                    placeholder="Calificación máxima"
+                    value={formData.calificacion}
+                    onChange={handleInputChange}
+                />
                 <label>Hora inicio</label>
-                <input type="time" name="horaInicio" />
+                <input
+                    type="time"
+                    name="horaInicio"
+                    value={formData.horaInicio}
+                    onChange={handleInputChange}
+                />
                 <label>Hora fin</label>
-                <input type="time" name="horaFin" />
-
-
+                <input
+                    type="time"
+                    name="horaFin"
+                    value={formData.horaFin}
+                    onChange={handleInputChange}
+                />
 
                 <div className="combobox">
                     <label>Universidad</label>
@@ -84,7 +159,7 @@ const ExamManagement = () => {
 
                     />
                 </div>
-                <button disabled={selectedTopic != "" ? false : true} onClick={() => handleClickNext()}>Siguiente</button>
+                <button type="submit" disabled={selectedTopic != "" ? false : true} >Siguiente</button>
             </form>
         </div>
     )

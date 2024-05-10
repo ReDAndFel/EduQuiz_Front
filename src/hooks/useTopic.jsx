@@ -24,7 +24,9 @@ export const useTopic = () => {
 
 
     const handleChangeTopic = (e) => {
-        setSelectedTopic(e.target.value)
+        const topicId = e.target.value;
+        const selectedTopic = topics.find(topic => topic.id === parseInt(topicId));
+        setSelectedTopic(selectedTopic);
     }
 
     return { topics, getTopics, handleChangeTopic, selectedTopic }

@@ -1,48 +1,51 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import "./QuestionManagement.css"
 import { useLocation, useNavigate } from "react-router-dom"
 
 const QuestionManagement = () => {
-    const [questions, setQuestions] = useState([])
+
     const navigate = useNavigate()
     const { state } = useLocation();
-    const { selectedUniversity, selectedCourse, selectedGroup, selectedTopic } =
-        state || {};
+    const { updateForm } = state
+    const [data, setData] = useState(updateForm || {});
 
     const handleAddQuestion = () => {
-        navigate('/agregar-pregunta', { state: { questions } });
-    }
+        navigate('/agregar-pregunta', { state: { data } });
+    };
 
-    useEffect(() => {
-        if (state?.questions) {
-            setQuestions(state.questions);
-        }
-    }, [state]);
+
+    const handleSaveQuetions = () => {
+        console.log("Data definitiva de examen:")
+        console.log(data)
+    }
 
     return (
         <div className="question-management-container">
             <h1>Preguntas</h1>
-            <h3>{selectedUniversity}</h3>
-            <h3>{selectedCourse}</h3>
-            <h3>{selectedGroup}</h3>
-            <h3>{selectedTopic}</h3>
+            <h3>Titulo:{data.titulo}</h3>
+            <h3>Curso: {data.curso.nombrecurso}</h3>
+            <h3>Tema: {data.tema.nombre}</h3>
             <div className="questions-container">
-                {questions.map((question, index) => (
-                    <div key={index} className="question-card">
-                        <h3>{question.statement}</h3>
-                        <ul>
-                            {question.answers.map((answer, answerIndex) => (
-                                <li key={answerIndex}>
-                                    {answer.text} {answer.isCorrect ? '(Correcta)' : '(Incorrecta)'}
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                ))}
+                {data.preguntas ? (
+                    data.preguntas.map((question, index) => (
+                        <div key={index} className="question-card">
+                            <h3>{question.enunciado}</h3>
+                            <ol type="A">
+                                {question.respuestas.map((answer, answerIndex) => (
+                                    <li key={answerIndex}>
+                                        {answer.opcionrespuesta}
+                                    </li>
+                                ))}
+                            </ol>
+                        </div>
+                    ))
+                ) : (
+                    <p>No hay preguntas disponibles</p>
+                )}
             </div>
 
             <button onClick={handleAddQuestion}>Agregar pregunta</button>
-            <button>Guardar preguntas</button>
+            <button onClick={handleSaveQuetions}>Guardar preguntas</button>
         </div>
     )
 }

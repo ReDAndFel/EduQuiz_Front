@@ -25,7 +25,9 @@ export const useCourse = () => {
 
 
     const handleChangeCourse = (e) => {
-        setSelectedCourse(e.target.value)
+        const courseId = e.target.value;
+        const selectedCourse = courses.find(course => course.id === parseInt(courseId));
+        setSelectedCourse(selectedCourse)
     }
 
     return { courses, handleChangeCourse,getCourses, selectedCourse }

@@ -1,0 +1,13 @@
+.form-question-unique-answord{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.answer-container{
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+    border: 1px solid var(--font-color);
+    border-radius: 0.4em;
+}
