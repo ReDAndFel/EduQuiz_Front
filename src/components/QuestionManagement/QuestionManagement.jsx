@@ -12,7 +12,7 @@ const QuestionManagement = () => {
     const [preguntas, setPreguntas] = useState(data.preguntas)
 
     const handleAddQuestion = () => {
-        navigate('/agregar-pregunta', { state: { data } });
+        navigate('/tipo-pregunta', { state: { data } });
     };
 
 

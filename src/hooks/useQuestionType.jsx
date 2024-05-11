@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 export const useQuestionType = () => {
     const [types, setTypes] = useState([])
-    const [selectedQuestionType, setSelectedQuestionType] = useState('')
+    const [selectedQuestionType, setSelectedQuestionType] = useState()
 
     useEffect(() => {
         // Aquí harías la petición a la base de datos para obtener los cursos

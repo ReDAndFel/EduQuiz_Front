@@ -10,7 +10,7 @@ const QuestionUniqueAnswordForm = () => {
     const navigate = useNavigate();
     const {states, handleChangeState, selectedState} = useStateQuestion()
     const { state } = useLocation();
-    const { data = {} } = state || {};
+    const { data, selectedQuestionType } = state || {};
 
     const handleAddAnswer = () => {
         setAnswers([...answers, { opcionrespuesta: "", correcta: "Incorrecta" }]);
@@ -32,7 +32,7 @@ const QuestionUniqueAnswordForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const newQuestion = { "enunciado": statement, "respuestas": answers,"idTema":data.idTema ,"idEstado":selectedState.id };
+        const newQuestion = { "enunciado": statement, "respuestas": answers,"idTema":data.idTema ,"idEstado":selectedState.id, idTipoPregunta: selectedQuestionType.id };
         const updateForm = {
             ...data,
             preguntas: [...(data.preguntas || []), newQuestion],

@@ -19,7 +19,7 @@ function App() {
         <Route path="/preguntas" element={<QuestionManagement />} />
         <Route path="/" element={<ExamManagement />} />
         <Route path="/examenes" element={<Exams />} />
-        <Route path="/agregar-pregunta" element={<QuestionUniqueAnswordForm />} />
+        <Route path="/agregar-pregunta-Selección múltiple única respuesta" element={<QuestionUniqueAnswordForm />} />
         <Route path="/tipo-pregunta" element={<QuestionType />} />
 
 
