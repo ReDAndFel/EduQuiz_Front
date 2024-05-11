@@ -14,15 +14,17 @@ const ExamManagement = () => {
     const [formData, setFormData] = useState({
         titulo: "",
         fecha: "",
-        duracionExamen: "",
-        cantidadPreguntas: "",
-        cantidadPreguntasXEstudiante: "",
-        calificacion: "",
+        duracionExamen: 0,
+        cantidadPreguntas: 0,
+        cantidadPreguntasXEstudiante: 0,
+        calificacion: 0,
+        notaParaAprobar: 0,
         horaInicio: "",
         horaFin: "",
         idCurso: 0,
         idTema: 0,
-        preguntas:[]
+        estado:"Borrador",
+        preguntas: []
     });
 
     const handleInputChange = (e) => {
@@ -108,6 +110,15 @@ const ExamManagement = () => {
                     name="calificacion"
                     placeholder="Calificación máxima"
                     value={formData.calificacion}
+                    onChange={handleInputChange}
+                />
+
+                <label>Calificación para aprobar</label>
+                <input
+                    type="number"
+                    name="notaParaAprobar"
+                    placeholder="Calificación mínima para aprobar"
+                    value={formData.notaParaAprobar}
                     onChange={handleInputChange}
                 />
                 <label>Hora inicio</label>
