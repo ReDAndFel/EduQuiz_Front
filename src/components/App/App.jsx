@@ -5,6 +5,7 @@ import ExamManagement from '../ExamManagement/ExamManagement'
 import QuestionManagement from '../QuestionManagement/QuestionManagement'
 import Exams from '../Exams/Exams'
 import QuestionUniqueAnswordForm from '../QuestionUniqueAnswordForm/QuestionUniqueAnswordForm'
+import QuestionType from '../QuestionType/QuestionType'
 
 function App() {
   return (
@@ -19,6 +20,8 @@ function App() {
         <Route path="/" element={<ExamManagement />} />
         <Route path="/examenes" element={<Exams />} />
         <Route path="/agregar-pregunta" element={<QuestionUniqueAnswordForm />} />
+        <Route path="/tipo-pregunta" element={<QuestionType />} />
+
 
       </Routes>
 

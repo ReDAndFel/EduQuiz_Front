@@ -1,0 +1,58 @@
+.question-type-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    padding: 1em;
+}
+
+.types-container {
+    display: flex;
+    gap: 1em;
+    align-items: center;
+    flex-wrap: wrap; 
+    font-weight: bold; 
+    justify-content: space-between;
+}
+
+
+.type-container {
+    display: flex;
+    width: 30%;
+    height: 10em;
+    border-radius: 0.4em;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 2em;
+    transition: ease-in, 400ms;
+}
+
+.type-container:hover {
+    cursor: pointer;
+    scale: 1.1;
+}
+
+/* Define los tres colores */
+.type-container:nth-child(3n+1) {
+    background-color: #ffb300;
+}
+
+.type-container:nth-child(3n+2) {
+    background-color: #faf44d;
+}
+
+.type-container:nth-child(3n+3) {
+    background-color: #fad24d;
+}
+
+.type-container:nth-child(3n+4) {
+    background-color: #d6762d;
+}
+
+.type-container:nth-child(3n+5) {
+    background-color: #f09148;
+}
+
+.type-container:nth-child(3n+6) {
+    background-color: #d65a2d;
+}
