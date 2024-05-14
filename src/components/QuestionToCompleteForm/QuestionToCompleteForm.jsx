@@ -1,24 +1,18 @@
 import { useState } from "react";
-import "./QuestionSortAnswordForm.css";
+import "./QuestionToCompleteForm.css";
 import { useLocation, useNavigate } from "react-router-dom";
 import SelectComponent from "../SelectComponent/SelectComponent";
 import { useStateQuestion } from "../../hooks/useStateQuestion";
 
-const QuestionSortAnswordForm = () => {
+const QuestionToCompleteForm = () => {
     const [statement, setStatement] = useState("");
-    const [answers, setAnswers] = useState([{ opcionrespuesta: "", correcta: "Incorrecta" }]);
+    const [answers, setAnswers] = useState([{ opcionrespuesta: "", correcta: "Correcta" }]);
     const navigate = useNavigate();
     const { states, handleChangeState, selectedState } = useStateQuestion()
     const { state } = useLocation();
     const { data, selectedQuestionType } = state || {};
-    const [numbers, setNumbers] = useState([1])
 
-    const handleAddAnswer = () => {
-        setAnswers([...answers, { opcionrespuesta: "", correcta: "" }]);
-        setNumbers([...numbers, (numbers.length + 1)])
-    };
-
-    const handleAnswerChange = (index, field, value) => {
+    const handleAnswerChange = (index,field, value) => {
         const newAnswers = [...answers];
         newAnswers[index][field] = value;
         setAnswers(newAnswers);
@@ -36,31 +30,25 @@ const QuestionSortAnswordForm = () => {
 
     return (
         <form className="form-question-unique-answord" onSubmit={handleSubmit}>
-            <h1>Crear pregunta de ordenar</h1>
+            <h1>Crear pregunta de completar </h1>
             <input
                 type="text"
                 placeholder="Enunciado"
                 value={statement}
-                onChange={(e) => setStatement(e.target.value)}
-            />
+                onChange={(e) => setStatement(e.target.value)} />
+
             {answers.map((answer, index) => (
                 <div className="answer-container" key={index}>
                     <label>Respuesta</label>
-                    <input
+                    <textarea
                         type="text"
                         placeholder={"Ingrese la respuesta"}
                         value={answer.opcionrespuesta}
                         onChange={(e) => handleAnswerChange(index, "opcionrespuesta", e.target.value)}
                     />
-                    <label>Valor</label>
-                    <SelectComponent list={numbers}
-                        onChange={(e)=>handleAnswerChange(index, "correcta", e.target.value)}
-                        firstOption={"Seleccione el orden de la respuesta"}
-                        defaultValue={answer.opcionrespuesta}
-                        disabled={false}
-                    />
                 </div>
             ))}
+
             <label>Privacidad</label>
             <SelectComponent
                 list={states}
@@ -70,12 +58,10 @@ const QuestionSortAnswordForm = () => {
                 disabled={false}
                 elementValue={"descripcion"}
             />
-            <button type="button" onClick={handleAddAnswer}>
-                Agregar respuesta
-            </button>
+
             <button type="submit">Guardar pregunta</button>
         </form>
     );
 };
 
-export default QuestionSortAnswordForm;
+export default QuestionToCompleteForm;

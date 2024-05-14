@@ -34,7 +34,7 @@ const QuestionMultipleAnswordForm = () => {
 
     return (
         <form className="form-question-unique-answord" onSubmit={handleSubmit}>
-            <h1>Crear pregunta de unica respuesta</h1>
+            <h1>Crear pregunta de multiple respuesta</h1>
             <input
                 type="text"
                 placeholder="Enunciado"
