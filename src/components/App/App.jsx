@@ -7,6 +7,7 @@ import Exams from '../Exams/Exams'
 import QuestionUniqueAnswordForm from '../QuestionMultipleAnswordForm/QuestionMultipleAnswordForm'
 import QuestionType from '../QuestionType/QuestionType'
 import QuestionMultipleAnswordForm from '../QuestionMultipleAnswordForm/QuestionMultipleAnswordForm'
+import QuestionTrueOrFalseForm from '../QuestionTrueOrFalseForm/QuestionTrueOrFalseForm'
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="/examenes" element={<Exams />} />
         <Route path="/agregar-pregunta-Selección múltiple única respuesta" element={<QuestionUniqueAnswordForm />} />
         <Route path="/agregar-pregunta-Selección múltiple múltiples respuestas" element={<QuestionMultipleAnswordForm />} />
+        <Route path="/agregar-pregunta-Falso y verdadero" element={<QuestionTrueOrFalseForm />} />
         <Route path="/tipo-pregunta" element={<QuestionType />} />
 
 
