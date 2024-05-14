@@ -8,8 +8,9 @@ const QuestionManagement = () => {
     const { state } = useLocation();
     const { updateForm } = state
     const [data, setData] = useState(updateForm);
-    const maxQuestions = data.cantidadPreguntas 
+    const maxQuestions = data.cantidadPreguntas
     const [preguntas, setPreguntas] = useState(data.preguntas)
+    const [preguntasLength, setPreguntasLength] = useState(preguntas.length)
 
     const handleAddQuestion = () => {
         navigate('/tipo-pregunta', { state: { data } });
@@ -31,28 +32,31 @@ const QuestionManagement = () => {
             <p><strong>Hora Inicio: </strong>{data.horaInicio}</p>
             <p><strong>Hora Fin: </strong>{data.horaFin}</p>
             <p><strong>Cantidad maximo de preguntas: </strong>{maxQuestions}</p>
-            <p><strong>Cantidad actual de preguntas: </strong>{preguntas.length}</p>
 
             <div className="questions-container">
 
-                {preguntas ? (
-                    <ol type="1">
-                        {preguntas.map((question, index) => (
-                            <li key={index} className="question-card">
-                                <label>{question.enunciado}</label>
-                                <ol type="A">
-                                    {question.respuestas.map((answer, answerIndex) => (
-                                        <li key={answerIndex}>
-                                            {answer.opcionrespuesta}
-                                        </li>
-                                    ))}
-                                </ol>
-                            </li>
-                        ))}
-                    </ol>
+                {preguntasLength > 0 ? (
+                    <>
+                        <ol type="1">
+                            {preguntas.map((question, index) => (
+                                <li key={index} className="question-card">
+                                    <label>{question.enunciado}</label>
+                                    <ol type="A">
+                                        {question.respuestas.map((answer, answerIndex) => (
+                                            <li key={answerIndex}>
+                                                {answer.opcionrespuesta}
+                                            </li>
+                                        ))}
+                                    </ol>
+                                </li>
+                            ))}
+                        </ol>
+                        {preguntasLength < maxQuestions && <p>Aun quedan {maxQuestions - preguntasLength} pregunta(s) por agregar, siga agregando preguntas o guarde el examen para que se asignen las preguntas restante automaticamente</p>
+                        }                    </>
+
 
                 ) : (
-                    <p>No hay preguntas disponibles</p>
+                    <p>No hay preguntas disponibles. Presione Agregar pregunta o guarde el examen para que se asignen preguntas aleatoriamente</p>
                 )}
             </div>
 
