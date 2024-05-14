@@ -8,6 +8,7 @@ import QuestionUniqueAnswordForm from '../QuestionMultipleAnswordForm/QuestionMu
 import QuestionType from '../QuestionType/QuestionType'
 import QuestionMultipleAnswordForm from '../QuestionMultipleAnswordForm/QuestionMultipleAnswordForm'
 import QuestionTrueOrFalseForm from '../QuestionTrueOrFalseForm/QuestionTrueOrFalseForm'
+import QuestionSortAnswordForm from '../QuestionSortAnswordForm/QuestionSortAnswordForm'
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="/agregar-pregunta-Selección múltiple única respuesta" element={<QuestionUniqueAnswordForm />} />
         <Route path="/agregar-pregunta-Selección múltiple múltiples respuestas" element={<QuestionMultipleAnswordForm />} />
         <Route path="/agregar-pregunta-Falso y verdadero" element={<QuestionTrueOrFalseForm />} />
+        <Route path="/agregar-pregunta-Ordenar" element={<QuestionSortAnswordForm />} />
         <Route path="/tipo-pregunta" element={<QuestionType />} />
 
 

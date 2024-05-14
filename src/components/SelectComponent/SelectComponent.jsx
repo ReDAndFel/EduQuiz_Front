@@ -6,7 +6,7 @@ const SelectComponent = ({ list, onChange, defaultValue, firstOption, disabled,e
             <option value="">{firstOption}</option>
             {list.map((element) => (
                 <option key={element.id} value={element.id}>
-                    {element[elementValue]}
+                    {elementValue ? element[elementValue]: element}
                 </option>
             ))}
         </select>
