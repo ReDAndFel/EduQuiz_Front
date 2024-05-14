@@ -10,6 +10,7 @@ import QuestionMultipleAnswordForm from '../QuestionMultipleAnswordForm/Question
 import QuestionTrueOrFalseForm from '../QuestionTrueOrFalseForm/QuestionTrueOrFalseForm'
 import QuestionSortAnswordForm from '../QuestionSortAnswordForm/QuestionSortAnswordForm'
 import QuestionToCompleteForm from '../QuestionToCompleteForm/QuestionToCompleteForm'
+import QuestionMatchAnswordForm from '../QuestionMatchAnswordForm/QuestionMatchAnswordForm'
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
         <Route path="/agregar-pregunta-Falso y verdadero" element={<QuestionTrueOrFalseForm />} />
         <Route path="/agregar-pregunta-Ordenar" element={<QuestionSortAnswordForm />} />
         <Route path="/agregar-pregunta-Completar" element={<QuestionToCompleteForm />} />
+        <Route path="/agregar-pregunta-Emparejar" element={<QuestionMatchAnswordForm />} />
         <Route path="/tipo-pregunta" element={<QuestionType />} />
 
 
