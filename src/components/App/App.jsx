@@ -4,8 +4,9 @@ import AsideMenu from '../AsideMenu/AsideMenu'
 import ExamManagement from '../ExamManagement/ExamManagement'
 import QuestionManagement from '../QuestionManagement/QuestionManagement'
 import Exams from '../Exams/Exams'
-import QuestionUniqueAnswordForm from '../QuestionUniqueAnswordForm/QuestionUniqueAnswordForm'
+import QuestionUniqueAnswordForm from '../QuestionMultipleAnswordForm/QuestionMultipleAnswordForm'
 import QuestionType from '../QuestionType/QuestionType'
+import QuestionMultipleAnswordForm from '../QuestionMultipleAnswordForm/QuestionMultipleAnswordForm'
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/" element={<ExamManagement />} />
         <Route path="/examenes" element={<Exams />} />
         <Route path="/agregar-pregunta-Selección múltiple única respuesta" element={<QuestionUniqueAnswordForm />} />
+        <Route path="/agregar-pregunta-Selección múltiple múltiples respuestas" element={<QuestionMultipleAnswordForm />} />
         <Route path="/tipo-pregunta" element={<QuestionType />} />
 
 
