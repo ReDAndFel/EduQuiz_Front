@@ -4,6 +4,7 @@
   margin: 0;
   box-sizing: border-box;
 
+  --primary-color: rgb(0, 53, 138); 
   --font-color: #212121;
   --selected-color: rgb(205, 205, 205);
   --backgroud-color: #e0e0e0;

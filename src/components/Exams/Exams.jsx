@@ -72,6 +72,7 @@ const Exams = () => {
                         {exams.map((exam, index) => (
                             <div key={index} className="exam-card">
                                 <label>{exam.titulo}</label>
+                                <label> Curso: {exam.idcurso.nombrecurso}</label>
                             </div>
                         ))}
                     </>

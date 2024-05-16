@@ -1,0 +1,37 @@
+.exams-management-container{
+    display: flex;
+    padding: 1em;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.combobox{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+}
+
+.combobox label{
+   font-weight: bold;
+}
+
+.exam-card {
+    background-image: url(../../../public/exam_background.jpg);
+    background-position: center;
+    background-size: cover;
+    width: 30%;
+    height: 10em;
+    border-radius: 0.4em;
+    border: 2px solid var(--selected-color);
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    font-weight: bold;
+    justify-content: center;
+    align-items: center;
+}
+
+.exam-card label{
+    color: var(--primary-color);
+}
