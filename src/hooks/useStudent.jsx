@@ -1,29 +1,31 @@
 import { useState } from "react"
-import dotenv from 'dotenv'
-
-dotenv.config()
-
 export const useStudent = () => {
 
     const [listStudents, setListStudents] = useState([])
+    const [selectedStudent, setSelectedStudent] = useState([])
 
-    const APIURL = process.env.API_URL_STUDENTS
-
-    const getAllStudents = async () => {
-        fetch(`${APIURL}/`)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(data => {
+    const getStudentsByIdCourse = async (idCourse) => {
+        try {
+            const respuesta = await fetch(`http://localhost:8084/estudiantes/curso/${idCourse}`)
+            if (!respuesta.ok) {
+                throw new Error('No se pudo completar la solicitud')
+            }
+            const data = await respuesta.json()
+            if (Array.isArray(data.response)) {
                 setListStudents(data.response)
-            })
-            .catch(error => {
-                console.error('Error en la solicitud http:', error);
-            });
+            } else {
+                console.error('La respuesta no contiene un array de estudiantes por curso:', data)
+            }
+        } catch (error) {
+            console.error('Error al obtener los estudiantes por curso:', error)
+        }
     }
 
-    return { getAllStudents, listStudents }
+    const handleChangeStudent = (e) => {
+        const studentId = e.target.value;
+        const selectedStudent = listStudents.find(student => student.id === parseInt(studentId));
+        setSelectedStudent(selectedStudent)
+    }
+
+    return { getStudentsByIdCourse, handleChangeStudent, selectedStudent, listStudents }
 }
