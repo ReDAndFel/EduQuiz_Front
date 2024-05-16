@@ -14,21 +14,37 @@ const Exam = () => {
     const [currentQuestion, setCurrentQuestion] = useState({});
     const questionsLength = questions.length
     const [selectedAnswers, setSelectedAnswers] = useState({});
-    const [data,  setData] = useState({})
+    const [data, setData] = useState([])
 
 
     useEffect(() => {
         getQuestionByExamIdAndIdStudent(selectedExam.id, selectedStudent.id)
     }, [])
 
+    useEffect(() => {
+        console.log("data:")
+
+        console.log(data)
+    }, [data])
+
     const handleNextQuestion = () => {
+        const newResponses = Object.values(selectedAnswers).filter(response => {
+            return !data.some(existingResponse => existingResponse.idRespuesta === response.idRespuesta);
+        });
+    
+        const updatedData = [...data, ...newResponses];
+        setData(updatedData);
         setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
     }
 
-    const handleClickSaveAnswers = () =>{
-        console.log("Pregunta anterior:")
-        console.log(currentQuestion)
-        console.log(selectedAnswers)
+    const handleClickSaveAnswers = () => {
+        const newResponses = Object.values(selectedAnswers).filter(response => {
+            return !data.some(existingResponse => existingResponse.idRespuesta === response.idRespuesta);
+        });
+    
+        const updatedData = [...data, ...newResponses];
+        setData(updatedData);
+        console.log("Examen finalizado")
     }
 
     useEffect(() => {
@@ -48,7 +64,7 @@ const Exam = () => {
             {currentQuestion && (
                 <div className="question-container">
                     <label>Pregunta {currentQuestionIndex + 1} de {questionsLength}</label>
-                    <QuestionCard currentQuestion={currentQuestion} answers={answers} selectedAnswers={selectedAnswers} setSelectedAnswers={setSelectedAnswers}/>
+                    <QuestionCard currentQuestion={currentQuestion} answers={answers} selectedAnswers={selectedAnswers} setSelectedAnswers={setSelectedAnswers} />
                     {currentQuestionIndex < questions.length - 1 && (
                         <div className="question-action-container">
                             <p>Si da a <strong>siguiente</strong> no podrá devolverse a la pregunta. Asegurese de haber contestado la pregunta antes de continuar</p>
@@ -59,7 +75,7 @@ const Exam = () => {
                 </div>
             )}
 
-            {currentQuestionIndex == (questionsLength - 1) && <button onClick={handleClickSaveAnswers}>Guardar respuestas</button> }
+            {currentQuestionIndex == (questionsLength - 1) && <button onClick={handleClickSaveAnswers}>Guardar respuestas</button>}
 
 
         </div>
