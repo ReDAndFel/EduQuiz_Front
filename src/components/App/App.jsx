@@ -11,6 +11,7 @@ import QuestionTrueOrFalseForm from '../QuestionTrueOrFalseForm/QuestionTrueOrFa
 import QuestionSortAnswordForm from '../QuestionSortAnswordForm/QuestionSortAnswordForm'
 import QuestionToCompleteForm from '../QuestionToCompleteForm/QuestionToCompleteForm'
 import QuestionMatchAnswordForm from '../QuestionMatchAnswordForm/QuestionMatchAnswordForm'
+import Exam from '../Exam/Exam'
 
 function App() {
   return (
@@ -31,7 +32,7 @@ function App() {
         <Route path="/agregar-pregunta-Completar" element={<QuestionToCompleteForm />} />
         <Route path="/agregar-pregunta-Emparejar" element={<QuestionMatchAnswordForm />} />
         <Route path="/tipo-pregunta" element={<QuestionType />} />
-
+        <Route path="/examen" element={<Exam />} />
 
       </Routes>
 

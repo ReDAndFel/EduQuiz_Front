@@ -11,9 +11,7 @@ const QuestionType = () => {
     const { types, handleTypeClick, selectedQuestionType } = useQuestionType()
 
     useEffect(() => {
-        if (selectedQuestionType) {
-            navigate(`/agregar-pregunta-${selectedQuestionType.descripcion}`, { state: { data, selectedQuestionType } });
-        }
+        if (selectedQuestionType) navigate(`/agregar-pregunta-${selectedQuestionType.descripcion}`, { state: { data, selectedQuestionType } })
 
     }, [selectedQuestionType])
 

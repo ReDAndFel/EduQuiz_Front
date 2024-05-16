@@ -27,6 +27,14 @@ const Exams = () => {
         getExamsByStudent(selectedStudent.id)
     }, [selectedStudent])
 
+    const handleClickExam = (exam) => {
+        handleExamClick(exam)
+    }
+
+    useEffect(() => {
+        if (selectedExam) navigate(`/examen`, { state: { selectedStudent, selectedExam } })
+    }, selectedExam)
+
     return (
         <div className="exams-management-container">
             <h1>Examenes</h1>
@@ -70,7 +78,7 @@ const Exams = () => {
                 {examsLength > 0 ? (
                     <>
                         {exams.map((exam, index) => (
-                            <div key={index} className="exam-card">
+                            <div onClick={() => handleClickExam(exam)} key={index} className="exam-card">
                                 <label>{exam.titulo}</label>
                                 <label> Curso: {exam.idcurso.nombrecurso}</label>
                             </div>

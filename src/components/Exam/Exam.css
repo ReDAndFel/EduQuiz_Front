@@ -1,0 +1,10 @@
+.exam-container{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+.question-container{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+}
