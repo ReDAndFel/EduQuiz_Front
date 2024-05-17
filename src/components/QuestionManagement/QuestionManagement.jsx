@@ -16,6 +16,10 @@ const QuestionManagement = () => {
         navigate('/tipo-pregunta', { state: { data } });
     };
 
+    const handleAddQuestionToBank = () => {
+        navigate('/banco-preguntas', { state: { data } });
+    };
+
 
     const handleSaveQuetions = () => {
         console.log("Data definitiva de examen:")
@@ -56,11 +60,17 @@ const QuestionManagement = () => {
 
 
                 ) : (
-                    <p>No hay preguntas disponibles. Presione Agregar pregunta o guarde el examen para que se asignen preguntas aleatoriamente</p>
+                    <p>No hay preguntas disponibles. Presione Agregar pregunta para crear una pregunta a su gusto, Agregar pregunta del banco para elegir una de las preguntas del banco o guarde el examen para que se asignen preguntas aleatoriamente</p>
                 )}
             </div>
 
-            {maxQuestions > preguntas.length && <button onClick={handleAddQuestion}>Agregar pregunta</button>}
+            {maxQuestions > preguntas.length &&
+                <>
+                    <button onClick={handleAddQuestion}>Agregar pregunta</button>
+                    <button onClick={handleAddQuestionToBank}>Agregar pregunta del banco</button>
+                </>
+
+            }
             <button onClick={handleSaveQuetions}>Guardar Examen</button>
         </div>
     )

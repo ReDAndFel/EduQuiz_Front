@@ -12,6 +12,7 @@ import QuestionSortAnswordForm from '../QuestionSortAnswordForm/QuestionSortAnsw
 import QuestionToCompleteForm from '../QuestionToCompleteForm/QuestionToCompleteForm'
 import QuestionMatchAnswordForm from '../QuestionMatchAnswordForm/QuestionMatchAnswordForm'
 import Exam from '../Exam/Exam'
+import BankQuestions from '../BankQuestions/BankQuestions'
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
         <Route path="/agregar-pregunta-Completar" element={<QuestionToCompleteForm />} />
         <Route path="/agregar-pregunta-Emparejar" element={<QuestionMatchAnswordForm />} />
         <Route path="/tipo-pregunta" element={<QuestionType />} />
+        <Route path="/banco-preguntas" element={<BankQuestions />} />
         <Route path="/examen" element={<Exam />} />
 
       </Routes>
