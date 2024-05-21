@@ -21,9 +21,28 @@ const QuestionManagement = () => {
     };
 
 
-    const handleSaveQuetions = () => {
+    const handleSaveQuetions = async () => {
         console.log("Data definitiva de examen:")
         console.log(data)
+        try {
+            const response = await fetch('http://localhost:8084/examenes/', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(data),
+            });
+        
+            if (response.ok) {
+              const responseData = await response.json();
+              console.log('Examen guardado exitosamente:', responseData);
+            } else {
+              console.error('Error al guardar el examen:', response.status);
+            }
+          } catch (error) {
+            console.error('Error en la solicitud:', error);
+          }
+        
     }
 
     return (
