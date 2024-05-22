@@ -5,17 +5,17 @@ import { useLocation, useNavigate } from "react-router-dom"
 import { useEffect, useState } from "react"
 
 const ExamManagement = () => {
-    const { topics, handleChangeTopic, getTopics, selectedTopic } = useTopic()
+    const { topics, handleChangeTopic, getTopics, getTopicById, selectedTopic } = useTopic()
     const navigate = useNavigate()
     const { state } = useLocation()
-    const { selectedCourse } = state
+    const { selectedCourse, selectedExam } = state
 
-    const [formData, setFormData] = useState({
+    const [formData, setFormData] = useState(selectedExam || {
         titulo: "",
         fecha: "",
-        duracionExamen: 0,
-        cantidadPreguntas: 0,
-        cantidadPreguntasXEstudiante: 0,
+        duracionexamen: 0,
+        cantidadpreguntas: 0,
+        cantidadpreguntasporexamen: 0,
         calificacion: 0,
         notaParaAprobar: 0,
         horaInicio: "",
@@ -25,6 +25,18 @@ const ExamManagement = () => {
         estado: "Borrador",
         preguntas: []
     })
+
+
+    useEffect(() => {
+        if (selectedExam) {
+            getTopicById(selectedExam.idTema)
+            console.log(formData)
+        }
+    }, [])
+
+    useEffect(() => {
+        getTopics()
+    }, [selectedCourse])
 
     const handleInputChange = (e) => {
         const { name, value } = e.target
@@ -47,10 +59,6 @@ const ExamManagement = () => {
         console.log(updateForm)
         navigate('/preguntas', { state: { updateForm } })
     }
-
-    useEffect(() => {
-        getTopics()
-    }, [selectedCourse])
 
 
     return (
@@ -77,7 +85,7 @@ const ExamManagement = () => {
                     type="number"
                     name="duracionExamen"
                     placeholder="Duracion del examen en minutos"
-                    value={formData.duracionExamen}
+                    value={formData.duracionexamen}
                     onChange={handleInputChange}
                 />
                 <label>Cantidad total de preguntas</label>
@@ -85,7 +93,7 @@ const ExamManagement = () => {
                     type="number"
                     name="cantidadPreguntas"
                     placeholder="Cantidad de preguntas totales"
-                    value={formData.cantidadPreguntas}
+                    value={formData.cantidadpreguntas}
                     onChange={handleInputChange}
                 />
                 <label>Cantidad de preguntas por estudiante</label>
@@ -93,7 +101,7 @@ const ExamManagement = () => {
                     type="number"
                     name="cantidadPreguntasXEstudiante"
                     placeholder="Cantidad de preguntas por estudiante"
-                    value={formData.cantidadPreguntasXEstudiante}
+                    value={formData.cantidadpreguntasporexamen}
                     onChange={handleInputChange}
                 />
                 <label>Calificación máxima</label>

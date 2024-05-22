@@ -22,6 +22,23 @@ export const useTopic = () => {
         }
     }
 
+    const getTopicById = async (idTopic) => {
+        try {
+            const respuesta = await fetch(`http://localhost:8084/temas/${idTopic}`)
+            if (!respuesta.ok) {
+                throw new Error('No se pudo completar la solicitud')
+            }
+            const data = await respuesta.json()
+            if (data.response) {
+                setSelectedTopic(data.response)
+            } else {
+                console.error('La respuesta no contiene un tema por id:', data)
+            }
+        } catch (error) {
+            console.error('Error al obtener un tema por id:', error)
+        }
+    }
+
 
     const handleChangeTopic = (e) => {
         const topicId = e.target.value;
@@ -29,5 +46,5 @@ export const useTopic = () => {
         setSelectedTopic(selectedTopic);
     }
 
-    return { topics, getTopics, handleChangeTopic, selectedTopic }
+    return { topics, getTopics, handleChangeTopic, getTopicById, selectedTopic }
 }

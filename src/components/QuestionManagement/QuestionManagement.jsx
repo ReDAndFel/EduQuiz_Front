@@ -9,7 +9,7 @@ const QuestionManagement = () => {
     const { updateForm } = state
     const [data, setData] = useState(updateForm)
     const maxQuestions = data.cantidadPreguntas
-    const [preguntas, setPreguntas] = useState(data.preguntas)
+    const [preguntas, setPreguntas] = useState( data.preguntas || [])
     const [preguntasLength, setPreguntasLength] = useState(preguntas.length)
 
     const handleAddQuestion = () => {

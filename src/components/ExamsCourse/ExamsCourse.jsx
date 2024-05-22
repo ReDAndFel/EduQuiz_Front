@@ -31,7 +31,10 @@ const ExamsCourse = () => {
     }
 
     useEffect(() => {
-        console.log(selectedExam)
+        if (selectedExam) {
+            console.log(selectedExam)
+            navigate("/gestionar-examen", { state: { selectedCourse, selectedExam } })
+        }
     }, [selectedExam])
 
 
@@ -72,7 +75,7 @@ const ExamsCourse = () => {
                                         <label>{exam.titulo}</label>
                                     </div>
                                 ))}
-                                <button className="add-exam-button" onClick={()=> handleClickAddExam()}>
+                                <button className="add-exam-button" onClick={() => handleClickAddExam()}>
                                     <PlusIcon />
                                 </button>
 
