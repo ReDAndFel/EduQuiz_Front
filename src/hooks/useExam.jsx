@@ -21,9 +21,26 @@ export const useExam = () => {
         }
     }
 
+    const getExamsByCourse = async (id) => {
+        try {
+            const respuesta = await fetch(`http://localhost:8084/examenes/curso/${id}`)
+            if (!respuesta.ok) {
+                throw new Error('No se pudo completar la solicitud')
+            }
+            const data = await respuesta.json()
+            if (Array.isArray(data.response)) {
+                setExams(data.response)
+            } else {
+                console.error('La respuesta no contiene un array de examenes por curso:', data)
+            }
+        } catch (error) {
+            console.error('Error al obtener los examenes por curso:', error)
+        }
+    }
+
     const handleExamClick = (exam) => {
         setSelectedExam(exam);
     }
 
-    return {exams, handleExamClick, getExamsByStudent, selectedExam}
+    return {exams, handleExamClick, getExamsByStudent,getExamsByCourse, selectedExam}
 }

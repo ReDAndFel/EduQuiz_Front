@@ -13,6 +13,7 @@ import QuestionToCompleteForm from '../QuestionToCompleteForm/QuestionToComplete
 import QuestionMatchAnswordForm from '../QuestionMatchAnswordForm/QuestionMatchAnswordForm'
 import Exam from '../Exam/Exam'
 import BankQuestions from '../BankQuestions/BankQuestions'
+import ExamsCourse from '../ExamsCourse/ExamsCourse'
 
 function App() {
   return (
@@ -22,9 +23,9 @@ function App() {
       </aside>
 
       <Routes>
-        <Route path="/gestionar-examen" element={<ExamManagement />} />
+        <Route path="/gestionar-examen" element={<ExamsCourse />} />
         <Route path="/preguntas" element={<QuestionManagement />} />
-        <Route path="/" element={<ExamManagement />} />
+        <Route path="/" element={<ExamsCourse />} />
         <Route path="/examenes" element={<Exams />} />
         <Route path="/agregar-pregunta-Selección múltiple única respuesta" element={<QuestionUniqueAnswordForm />} />
         <Route path="/agregar-pregunta-Selección múltiple múltiples respuestas" element={<QuestionMultipleAnswordForm />} />

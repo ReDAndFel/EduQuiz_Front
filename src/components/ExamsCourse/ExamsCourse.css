@@ -1,4 +1,4 @@
-.exams-management-container {
+.exams-course-container {
     display: flex;
     padding: 1em;
     flex-direction: column;
@@ -41,7 +41,7 @@
     cursor: pointer;
 }
 
-.list-exams-container {
+.list-exams-course-container {
     display: flex;
     gap: 2em;
     flex-wrap: wrap;

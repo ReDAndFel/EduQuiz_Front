@@ -22,21 +22,21 @@ const QuestionCard = ({ currentQuestion, answers, selectedAnswers, setSelectedAn
 
                 if (isChecked) {
                     // Agregar la respuesta seleccionada al objeto de respuestas seleccionadas
-                    updatedSelectedAnswers[answerId] = { idRespuesta: answerId, idAsignacionPregunta, respuesta: opcionrespuesta };
+                    updatedSelectedAnswers[answerId] = { idRespuesta: answerId, idAsignacionPregunta, respuesta: opcionrespuesta }
                 } else {
                     // Eliminar la respuesta seleccionada si se desmarca
-                    delete updatedSelectedAnswers[answerId];
+                    delete updatedSelectedAnswers[answerId]
                 }
 
-                return updatedSelectedAnswers;
+                return updatedSelectedAnswers
             } else if (currentQuestionQuestionInfo.idtipopregunta.id === 2 || currentQuestionQuestionInfo.idtipopregunta.id === 3) {
                 // Pregunta de única selección
                 return isChecked
                     ? [{ idRespuesta: answerId, idAsignacionPregunta, respuesta: opcionrespuesta }]
-                    : [];
+                    : []
             }
-        });
-    };
+        })
+    }
 
     return (
         <div className="question-card">
@@ -73,6 +73,6 @@ const QuestionCard = ({ currentQuestion, answers, selectedAnswers, setSelectedAn
 
         </div>
     )
-};
+}
 
 export default QuestionCard

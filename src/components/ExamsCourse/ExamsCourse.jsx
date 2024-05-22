@@ -1,17 +1,15 @@
 import { useNavigate } from "react-router-dom"
 import { useCourse } from "../../hooks/useCourse"
-import { useInstitution } from "../../hooks/useInstitution"
-import { useStudent } from "../../hooks/useStudent"
 import { useExam } from "../../hooks/useExam"
-import SelectComponent from "../SelectComponent/SelectComponent"
-import "./Exams.css"
+import { useInstitution } from "../../hooks/useInstitution"
+import "./ExamsCourse.css"
 import { useEffect } from "react"
+import SelectComponent from "../SelectComponent/SelectComponent"
 
-const Exams = () => {
+const ExamsCourse = () => {
     const { universities, handleChangeUniversity, selectedUniversity } = useInstitution()
     const { courses, getCourses, handleChangeCourse, selectedCourse } = useCourse()
-    const { getStudentsByIdCourse, handleChangeStudent, selectedStudent, listStudents } = useStudent()
-    const { exams, handleExamClick, getExamsByStudent, selectedExam } = useExam()
+    const { exams, handleExamClick, getExamsByCourse, selectedExam } = useExam()
     const examsLength = exams.length
     const navigate = useNavigate()
 
@@ -20,25 +18,21 @@ const Exams = () => {
     }, [selectedUniversity])
 
     useEffect(() => {
-        getStudentsByIdCourse(selectedCourse.id)
+        getExamsByCourse(selectedCourse.id)
     }, [selectedCourse])
-
-    useEffect(() => {
-        getExamsByStudent(selectedStudent.id)
-    }, [selectedStudent])
 
     const handleClickExam = (exam) => {
         handleExamClick(exam)
     }
 
     useEffect(() => {
-        if (selectedExam) navigate(`/examen`, { state: { selectedStudent, selectedExam } })
+        if (selectedExam) console.log(selectedExam)
     }, selectedExam)
 
-    return (
-        <div className="exams-management-container">
-            <h1>Examenes</h1>
 
+    return (
+        <div className="exams-course-container">
+            <h1>Examenes</h1>
             <div className="combobox">
                 <label>Universidad</label>
                 <SelectComponent
@@ -61,26 +55,13 @@ const Exams = () => {
                     elementValue={"nombrecurso"}
                 />
             </div>
-            <div className="combobox">
-                <label>Estudiante</label>
-                <SelectComponent
-                    list={listStudents}
-                    onChange={handleChangeStudent}
-                    defaultValue={selectedStudent}
-                    firstOption="Seleccione un estudiante"
-                    disabled={selectedCourse != "" ? false : true}
-                    elementValue={"nombre"}
-                />
-            </div>
-
-            <div className="list-exams-container">
+            <div className="list-exams-course-container">
 
                 {examsLength > 0 ? (
                     <>
                         {exams.map((exam, index) => (
                             <div onClick={() => handleClickExam(exam)} key={index} className="exam-card">
                                 <label>{exam.titulo}</label>
-                                <label> Curso: {exam.idcurso.nombrecurso}</label>
                             </div>
                         ))}
                     </>
@@ -88,8 +69,12 @@ const Exams = () => {
                     <p>No examenes disponibles.</p>
                 )}
             </div>
+
+
+
+
         </div>
     )
 }
 
-export default Exams
+export default ExamsCourse

@@ -5,20 +5,20 @@ import { useLocation, useNavigate } from "react-router-dom"
 const QuestionManagement = () => {
 
     const navigate = useNavigate()
-    const { state } = useLocation();
+    const { state } = useLocation()
     const { updateForm } = state
-    const [data, setData] = useState(updateForm);
+    const [data, setData] = useState(updateForm)
     const maxQuestions = data.cantidadPreguntas
     const [preguntas, setPreguntas] = useState(data.preguntas)
     const [preguntasLength, setPreguntasLength] = useState(preguntas.length)
 
     const handleAddQuestion = () => {
-        navigate('/tipo-pregunta', { state: { data } });
-    };
+        navigate('/tipo-pregunta', { state: { data } })
+    }
 
     const handleAddQuestionToBank = () => {
-        navigate('/banco-preguntas', { state: { data } });
-    };
+        navigate('/banco-preguntas', { state: { data } })
+    }
 
 
     const handleSaveQuetions = async () => {
@@ -31,16 +31,16 @@ const QuestionManagement = () => {
                 'Content-Type': 'application/json',
               },
               body: JSON.stringify(data),
-            });
+            })
         
             if (response.ok) {
-              const responseData = await response.json();
-              console.log('Examen guardado exitosamente:', responseData);
+              const responseData = await response.json()
+              console.log('Examen guardado exitosamente:', responseData)
             } else {
-              console.error('Error al guardar el examen:', response.status);
+              console.error('Error al guardar el examen:', response.status)
             }
           } catch (error) {
-            console.error('Error en la solicitud:', error);
+            console.error('Error en la solicitud:', error)
           }
         
     }

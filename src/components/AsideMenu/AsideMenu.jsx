@@ -4,11 +4,11 @@ import { useState } from "react"
 
 const AsideMenu = () => {
 
-    const [selectedItem, setSelectedItem] = useState(null);
+    const [selectedItem, setSelectedItem] = useState(null)
 
     const handleItemClick = (index) => {
-        setSelectedItem(index);
-    };
+        setSelectedItem(index)
+    }
 
     return (
         <nav className="aside-menu">

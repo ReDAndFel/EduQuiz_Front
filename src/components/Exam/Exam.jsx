@@ -1,19 +1,19 @@
-import { useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom"
 import "./Exam.css"
-import { useQuestion } from "../../hooks/useQuestion";
-import { useEffect, useState } from "react";
-import { useAnswer } from "../../hooks/useAnswer";
-import QuestionCard from "../QuestionCard/QuestionCard";
+import { useQuestion } from "../../hooks/useQuestion"
+import { useEffect, useState } from "react"
+import { useAnswer } from "../../hooks/useAnswer"
+import QuestionCard from "../QuestionCard/QuestionCard"
 
 const Exam = () => {
-    const { state } = useLocation();
+    const { state } = useLocation()
     const { selectedStudent, selectedExam } = state || {}
     const { questions, handleQuestionClick, getQuestionByExamIdAndIdStudent, selectedQuestion } = useQuestion()
     const { answers, handleAnswerClick, getAnswerByIdQuestion, selectedAnswer } = useAnswer()
-    const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-    const [currentQuestion, setCurrentQuestion] = useState({});
+    const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
+    const [currentQuestion, setCurrentQuestion] = useState({})
     const questionsLength = questions.length
-    const [selectedAnswers, setSelectedAnswers] = useState({});
+    const [selectedAnswers, setSelectedAnswers] = useState({})
     const [data, setData] = useState([])
 
 
@@ -29,21 +29,21 @@ const Exam = () => {
 
     const handleNextQuestion = () => {
         const newResponses = Object.values(selectedAnswers).filter(response => {
-            return !data.some(existingResponse => existingResponse.idRespuesta === response.idRespuesta);
-        });
+            return !data.some(existingResponse => existingResponse.idRespuesta === response.idRespuesta)
+        })
     
-        const updatedData = [...data, ...newResponses];
-        setData(updatedData);
-        setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
+        const updatedData = [...data, ...newResponses]
+        setData(updatedData)
+        setCurrentQuestionIndex((prevIndex) => prevIndex + 1)
     }
 
     const handleClickSaveAnswers = () => {
         const newResponses = Object.values(selectedAnswers).filter(response => {
-            return !data.some(existingResponse => existingResponse.idRespuesta === response.idRespuesta);
-        });
+            return !data.some(existingResponse => existingResponse.idRespuesta === response.idRespuesta)
+        })
     
-        const updatedData = [...data, ...newResponses];
-        setData(updatedData);
+        const updatedData = [...data, ...newResponses]
+        setData(updatedData)
         console.log("Examen finalizado")
     }
 
@@ -51,10 +51,10 @@ const Exam = () => {
         if (questionsLength > 0) {
             console.log("Pregunta anterior:")
             console.log(currentQuestion)
-            setCurrentQuestion(questions[currentQuestionIndex]);
-            getAnswerByIdQuestion(questions[currentQuestionIndex][0].id);
+            setCurrentQuestion(questions[currentQuestionIndex])
+            getAnswerByIdQuestion(questions[currentQuestionIndex][0].id)
         }
-    }, [currentQuestionIndex, questions]);
+    }, [currentQuestionIndex, questions])
 
     return (
         <div className="exam-container">

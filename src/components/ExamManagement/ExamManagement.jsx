@@ -1,10 +1,10 @@
-import SelectComponent from "../SelectComponent/SelectComponent";
+import SelectComponent from "../SelectComponent/SelectComponent"
 import "./ExamManagement.css"
-import { useCourse } from "../../hooks/useCourse";
-import { useTopic } from "../../hooks/useTopic";
-import { useLocation, useNavigate } from "react-router-dom";
-import { useInstitution } from "../../hooks/useInstitution";
-import { useEffect, useState } from "react";
+import { useCourse } from "../../hooks/useCourse"
+import { useTopic } from "../../hooks/useTopic"
+import { useLocation, useNavigate } from "react-router-dom"
+import { useInstitution } from "../../hooks/useInstitution"
+import { useEffect, useState } from "react"
 
 const ExamManagement = () => {
     const { universities, handleChangeUniversity, selectedUniversity } = useInstitution()
@@ -25,18 +25,18 @@ const ExamManagement = () => {
         idTema: 0,
         estado:"Borrador",
         preguntas: []
-    });
+    })
 
     const handleInputChange = (e) => {
-        const { name, value } = e.target;
+        const { name, value } = e.target
         setFormData({
             ...formData,
             [name]: value
-        });
-    };
+        })
+    }
 
     const navigate = useNavigate()
-    const { state } = useLocation();
+    const { state } = useLocation()
 
     const handleClickNext = (e) => {
         e.preventDefault()
@@ -47,9 +47,9 @@ const ExamManagement = () => {
             idCurso: selectedCourse.id,
             idTema: selectedTopic.id
 
-        };
+        }
         console.log(updateForm)
-        navigate('/preguntas', { state: { updateForm } });
+        navigate('/preguntas', { state: { updateForm } })
     }
 
     useEffect(() => {

@@ -1,18 +1,17 @@
 import "./BankQuestions.css"
-import SelectComponent from "../SelectComponent/SelectComponent";
-import { useQuestion } from "../../hooks/useQuestion";
-import { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { useAnswer } from "../../hooks/useAnswer";
+import SelectComponent from "../SelectComponent/SelectComponent"
+import { useQuestion } from "../../hooks/useQuestion"
+import { useEffect, useState } from "react"
+import { useLocation, useNavigate } from "react-router-dom"
+import { useAnswer } from "../../hooks/useAnswer"
 
 const BankQuestions = () => {
-    const { state } = useLocation();
-    const { data } = state || {};
+    const { state } = useLocation()
+    const { data } = state || {}
     const { questions, handleQuestionClick, getQuestionByTopicId, selectedQuestion } = useQuestion()
     const { answers, getAnswerByIdQuestion } = useAnswer()
-    const [bankQuestion, setBankQuestion] = useState({})
 
-    const navigate = useNavigate();
+    const navigate = useNavigate()
     const idTema = data.idTema
 
     useEffect(() => {
@@ -29,19 +28,22 @@ const BankQuestions = () => {
             preguntas: [
                 ...(data.preguntas || []),
                 {
+                    id: selectedQuestion.id,
                     enunciado: selectedQuestion.enunciado,
                     idEstado: selectedQuestion.idestado.id,
                     idTema: selectedQuestion.idtema.id,
+                    peso: selectedQuestion.peso,
                     idTipoPregunta: selectedQuestion.idtipopregunta.id,
                     respuestas: answers.map((answer) => ({
+                        id: answer.id,
                         opcionrespuesta: answer.opcionrespuesta,
                         correcta: answer.correcta,
                     })),
                 },
             ],
-        };
-        navigate("/preguntas", { state: { updateForm } });
-    };
+        }
+        navigate("/preguntas", { state: { updateForm } })
+    }
 
     return (
         <div className="bank-questions-container">
