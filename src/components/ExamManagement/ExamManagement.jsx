@@ -83,7 +83,7 @@ const ExamManagement = () => {
                 <label>Duracion</label>
                 <input
                     type="number"
-                    name="duracionExamen"
+                    name="duracionexamen"
                     placeholder="Duracion del examen en minutos"
                     value={formData.duracionexamen}
                     onChange={handleInputChange}
@@ -91,7 +91,7 @@ const ExamManagement = () => {
                 <label>Cantidad total de preguntas</label>
                 <input
                     type="number"
-                    name="cantidadPreguntas"
+                    name="cantidadpreguntas"
                     placeholder="Cantidad de preguntas totales"
                     value={formData.cantidadpreguntas}
                     onChange={handleInputChange}
@@ -99,7 +99,7 @@ const ExamManagement = () => {
                 <label>Cantidad de preguntas por estudiante</label>
                 <input
                     type="number"
-                    name="cantidadPreguntasXEstudiante"
+                    name="cantidadpreguntasporexamen"
                     placeholder="Cantidad de preguntas por estudiante"
                     value={formData.cantidadpreguntasporexamen}
                     onChange={handleInputChange}
