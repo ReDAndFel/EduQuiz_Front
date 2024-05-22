@@ -58,13 +58,29 @@ const ExamsCourse = () => {
             <div className="list-exams-course-container">
 
                 {examsLength > 0 ? (
-                    <>
-                        {exams.map((exam, index) => (
-                            <div onClick={() => handleClickExam(exam)} key={index} className="exam-card">
-                                <label>{exam.titulo}</label>
+                    <div className="list-exams-sections">
+                        <div className="list-exams-section">
+                            <h3>Borradores</h3>
+                            <div className="exams-course">
+                                {exams.filter(exam => exam.estado === "Borrador").map((exam, index) => (
+                                    <div onClick={() => handleClickExam(exam)} key={index} className="exam-card">
+                                        <label>{exam.titulo}</label>
+                                    </div>
+                                ))}
                             </div>
-                        ))}
-                    </>
+                        </div>
+                        <div className="list-exams-section">
+                            <h3>Publicados</h3>
+                            <div className="exams-course">
+                                {exams.filter(exam => exam.estado === "Publicado").map((exam, index) => (
+                                    <div onClick={() => handleClickExam(exam)} key={index} className="exam-card">
+                                        <label>{exam.titulo}</label>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+
+                    </div>
                 ) : (
                     <p>No examenes disponibles.</p>
                 )}

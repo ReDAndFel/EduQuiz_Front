@@ -41,7 +41,19 @@
     cursor: pointer;
 }
 
-.list-exams-course-container {
+.list-exams-sections{
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+}
+
+.list-exams-section{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+}
+
+.exams-course {
     display: flex;
     gap: 2em;
     flex-wrap: wrap;
