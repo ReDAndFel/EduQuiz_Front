@@ -30,6 +30,7 @@
     gap: 1em;
     font-weight: bold;
     justify-content: center;
+    transition: ease-in 200ms;
 }
 
 .exam-card label {
@@ -37,7 +38,7 @@
 }
 
 .exam-card:hover {
-    scale: 1.1;
+    scale: 1.05;
     cursor: pointer;
 }
 

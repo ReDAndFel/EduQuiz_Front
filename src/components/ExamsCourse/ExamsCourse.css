@@ -20,8 +20,8 @@
     background-image: url(../../../public/exam_background.jpg);
     background-position: center;
     background-size: cover;
-    width: 30%;
-    height: 16em;
+    width: 22%;
+    height: 14em;
     border-radius: 0.4em;
     border: 2px solid var(--selected-color);
     padding: 1em;
@@ -30,6 +30,7 @@
     gap: 1em;
     font-weight: bold;
     justify-content: center;
+    transition: ease-in 200ms;
 }
 
 .exam-card label {
@@ -37,17 +38,17 @@
 }
 
 .exam-card:hover {
-    scale: 1.1;
+    scale: 1.05;
     cursor: pointer;
 }
 
-.list-exams-sections{
+.list-exams-sections {
     display: flex;
     flex-direction: column;
     gap: 2em;
 }
 
-.list-exams-section{
+.list-exams-section {
     display: flex;
     flex-direction: column;
     gap: 0.5em;
@@ -57,4 +58,23 @@
     display: flex;
     gap: 2em;
     flex-wrap: wrap;
+}
+
+.add_exam_button {
+    width: 4em;
+}
+
+.add-exam-button {
+    background: none;
+    width: 2.5em;
+    height: 2.5em;
+    display: flex;
+    align-self: center;
+    transition: ease-in 200ms;
+    border: none;
+}
+
+.add-exam-button:hover {
+    scale: 1.2;
+    cursor: pointer;
 }

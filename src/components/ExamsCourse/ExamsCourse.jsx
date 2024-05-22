@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom"
 import { useCourse } from "../../hooks/useCourse"
 import { useExam } from "../../hooks/useExam"
 import { useInstitution } from "../../hooks/useInstitution"
+import PlusIcon from "../../../public/icons/plus_icon/PlusIcon"
 import "./ExamsCourse.css"
 import { useEffect } from "react"
 import SelectComponent from "../SelectComponent/SelectComponent"
@@ -25,9 +26,13 @@ const ExamsCourse = () => {
         handleExamClick(exam)
     }
 
+    const handleClickAddExam = (exam) => {
+        navigate("/gestionar-examen", { state: { selectedCourse } })
+    }
+
     useEffect(() => {
-        if (selectedExam) console.log(selectedExam)
-    }, selectedExam)
+        console.log(selectedExam)
+    }, [selectedExam])
 
 
     return (
@@ -67,6 +72,10 @@ const ExamsCourse = () => {
                                         <label>{exam.titulo}</label>
                                     </div>
                                 ))}
+                                <button className="add-exam-button" onClick={()=> handleClickAddExam()}>
+                                    <PlusIcon />
+                                </button>
+
                             </div>
                         </div>
                         <div className="list-exams-section">

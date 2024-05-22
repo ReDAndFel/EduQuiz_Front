@@ -1,15 +1,14 @@
 import SelectComponent from "../SelectComponent/SelectComponent"
 import "./ExamManagement.css"
-import { useCourse } from "../../hooks/useCourse"
 import { useTopic } from "../../hooks/useTopic"
 import { useLocation, useNavigate } from "react-router-dom"
-import { useInstitution } from "../../hooks/useInstitution"
 import { useEffect, useState } from "react"
 
 const ExamManagement = () => {
-    const { universities, handleChangeUniversity, selectedUniversity } = useInstitution()
-    const { courses, getCourses, handleChangeCourse, selectedCourse } = useCourse()
     const { topics, handleChangeTopic, getTopics, selectedTopic } = useTopic()
+    const navigate = useNavigate()
+    const { state } = useLocation()
+    const { selectedCourse } = state
 
     const [formData, setFormData] = useState({
         titulo: "",
@@ -23,7 +22,7 @@ const ExamManagement = () => {
         horaFin: "",
         idCurso: 0,
         idTema: 0,
-        estado:"Borrador",
+        estado: "Borrador",
         preguntas: []
     })
 
@@ -34,9 +33,6 @@ const ExamManagement = () => {
             [name]: value
         })
     }
-
-    const navigate = useNavigate()
-    const { state } = useLocation()
 
     const handleClickNext = (e) => {
         e.preventDefault()
@@ -51,10 +47,6 @@ const ExamManagement = () => {
         console.log(updateForm)
         navigate('/preguntas', { state: { updateForm } })
     }
-
-    useEffect(() => {
-        getCourses(selectedUniversity.id)
-    }, [selectedUniversity])
 
     useEffect(() => {
         getTopics()
@@ -135,29 +127,6 @@ const ExamManagement = () => {
                     value={formData.horaFin}
                     onChange={handleInputChange}
                 />
-
-                <div className="combobox">
-                    <label>Universidad</label>
-                    <SelectComponent
-                        list={universities}
-                        onChange={handleChangeUniversity}
-                        defaultValue={selectedUniversity}
-                        firstOption="Seleccione una universidad"
-                        disable={false}
-                        elementValue={"nombreninstitucion"}
-                    />
-                </div>
-                <div className="combobox">
-                    <label>Curso</label>
-                    <SelectComponent
-                        list={courses}
-                        onChange={handleChangeCourse}
-                        defaultValue={selectedCourse}
-                        firstOption="Seleccione un curso"
-                        disabled={selectedUniversity != "" ? false : true}
-                        elementValue={"nombrecurso"}
-                    />
-                </div>
 
                 <div className="combobox">
                     <label>Tema</label>
