@@ -1,0 +1,41 @@
+.exam-card-container {
+    background-image: url(../../../public/exam_background.jpg);
+    background-position: center;
+    background-size: cover;
+    width: 22%;
+    height: 14em;
+    border-radius: 0.4em;
+    border: 2px solid var(--selected-color);
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    font-weight: bold;
+    transition: ease-in 200ms;
+}
+
+.exam-card-container label {
+    color: var(--primary-color);
+}
+
+.exam-card-container:hover {
+    scale: 1.05;
+    cursor: pointer;
+}
+
+
+.delete-exam-button {
+    background: none;
+    width: 1.5em;
+    height: 1.5em;
+    display: flex;
+    align-self: self-end;
+    justify-self: flex-start;
+    transition: ease-in 200ms;
+    border: none;
+}
+
+.delete-exam-button:hover {
+    scale: 1.2;
+    cursor: pointer;
+}

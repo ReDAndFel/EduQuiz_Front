@@ -3,6 +3,7 @@ import { useState } from "react"
 export const useExam = () => {
     const [exams, setExams] = useState([])
     const [selectedExam, setSelectedExam] = useState()
+    const [selectedExamToDelete, setSelectedExamToDelete] = useState()
 
     const getExamsByStudent = async (id) => {
         try {
@@ -38,9 +39,29 @@ export const useExam = () => {
         }
     }
 
+    const deleteExam = async (id) => {
+        try {
+            const respuesta = await fetch(`http://localhost:8084/examenes/${id}`, {
+                method: 'DELETE'
+            });
+
+            if (!respuesta.ok) {
+                const data = await respuesta.json()
+                throw new Error('No se pudo completar la solicitud de eliminar curso. ' + data.response)
+            }
+            console.log('Examen eliminado correctamente');
+        } catch (error) {
+            console.error('Error al eliminar el examen:', error);
+        }
+    }
+
     const handleExamClick = (exam) => {
         setSelectedExam(exam);
     }
 
-    return {exams, handleExamClick, getExamsByStudent,getExamsByCourse, selectedExam}
+    const handleExamToDeleteClick = (exam) => {
+        setSelectedExamToDelete(exam);
+    }
+
+    return { exams, handleExamClick, deleteExam,getExamsByStudent, handleExamToDeleteClick, selectedExamToDelete, getExamsByCourse, selectedExam }
 }

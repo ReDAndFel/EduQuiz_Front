@@ -16,31 +16,7 @@
     font-weight: bold;
 }
 
-.exam-card {
-    background-image: url(../../../public/exam_background.jpg);
-    background-position: center;
-    background-size: cover;
-    width: 22%;
-    height: 14em;
-    border-radius: 0.4em;
-    border: 2px solid var(--selected-color);
-    padding: 1em;
-    display: flex;
-    flex-direction: column;
-    gap: 1em;
-    font-weight: bold;
-    justify-content: center;
-    transition: ease-in 200ms;
-}
 
-.exam-card label {
-    color: var(--primary-color);
-}
-
-.exam-card:hover {
-    scale: 1.05;
-    cursor: pointer;
-}
 
 .list-exams-sections {
     display: flex;
