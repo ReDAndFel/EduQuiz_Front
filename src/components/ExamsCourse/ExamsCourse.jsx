@@ -19,34 +19,42 @@ const ExamsCourse = () => {
     const openModal = () => setModalOpen(true)
     const closeModal = () => setModalOpen(false)
 
+    //se ejecuta cuando cambia selectedUniversity
     useEffect(() => {
         if (selectedUniversity) getCourses(selectedUniversity.id)
     }, [selectedUniversity])
 
+    //Se ejecuta cuando cambia selectedCourse
     useEffect(() => {
         if (selectedCourse) getExamsByCourse(selectedCourse.id)
     }, [selectedCourse])
 
+    //Se ejecuta al darle click a un examn
     const handleClickExam = (exam) => {
         handleExamClick(exam)
     }
 
+    //Se ejecuta al darle click al boton de eliminar examen, este abre la modal de confirmacion y cambia el selectedExamtoDelete por el examen que se quiere eliminar
     const handleClickDelete = async (exam) => {
         await handleExamToDeleteClick(exam)
         openModal()
     }
 
+    //Elimina el examen y vuelve a cargar los examenes por curso
     const handleDeleteExam = async () => {
         if (selectedExamToDelete) {
             await deleteExam(selectedExamToDelete.id)
             getExamsByCourse(selectedCourse.id)
+            closeModal()
         }
     }
 
+    //Redirecciona a la interfaz de crear examen
     const handleClickAddExam = (exam) => {
         navigate("/gestionar-examen", { state: { selectedCourse } })
     }
 
+    //Al darle click a un examen re direcciona al formulario con su info para actualizarlo o verlo
     useEffect(() => {
         if (selectedExam) {
             console.log(selectedExam)
@@ -100,7 +108,7 @@ const ExamsCourse = () => {
                             <h3>Publicados</h3>
                             <div className="exams-course">
                                 {exams.filter(exam => exam.estado === "Publicado").map((exam, index) => (
-                                    <ExamCard onClick={() => handleClickExam(exam)} key={index} exam={exam} />
+                                    <ExamCard onClick={handleClickExam} key={index} exam={exam} />
                                 ))}
                             </div>
                         </div>
