@@ -1,6 +1,7 @@
 import { useState } from "react"
 import "./QuestionManagement.css"
 import { useLocation, useNavigate } from "react-router-dom"
+import { useExam } from "../../hooks/useExam"
 
 const QuestionManagement = () => {
 
@@ -8,9 +9,11 @@ const QuestionManagement = () => {
     const { state } = useLocation()
     const { updateForm } = state
     const [data, setData] = useState(updateForm)
-    const maxQuestions = data.cantidadPreguntas
-    const [preguntas, setPreguntas] = useState( data.preguntas || [])
+    const maxQuestions = data.cantidadpreguntas
+    const [preguntas, setPreguntas] = useState(data.preguntas || [])
     const [preguntasLength, setPreguntasLength] = useState(preguntas.length)
+    const estadoExamen = data.estado
+    const { createExam, updateExam } = useExam()
 
     const handleAddQuestion = () => {
         navigate('/tipo-pregunta', { state: { data } })
@@ -24,25 +27,25 @@ const QuestionManagement = () => {
     const handleSaveQuetions = async () => {
         console.log("Data definitiva de examen:")
         console.log(data)
-        try {
-            const response = await fetch('http://localhost:8084/examenes/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data),
-            })
-
-            if (response.ok) {
-                const responseData = await response.json()
-                console.log('Examen guardado exitosamente:', responseData)
-            } else {
-                console.error('Error al guardar el examen:', response.status)
-            }
-        } catch (error) {
-            console.error('Error en la solicitud:', error)
+        if (data.id) {
+            console.log("Examen a actualizar")
+            //await updateExam(data.id, data)
+        } else {
+            console.log("Examen a crear")
+            //await createExam(data)
         }
+        navigate("/gestionar-examenes")
 
+    }
+
+    const handleClickPublish = () =>{
+
+    }
+
+    const handlePublishExam = async () => {
+        console.log("Data definitiva de examen a publicar:")
+        console.log(data)
+        //await publishExam(data.id, data)
         navigate("/gestionar-examenes")
 
     }
@@ -56,7 +59,9 @@ const QuestionManagement = () => {
             <p><strong>Fecha: </strong>{data.fecha}</p>
             <p><strong>Hora Inicio: </strong>{data.horaInicio}</p>
             <p><strong>Hora Fin: </strong>{data.horaFin}</p>
-            <p><strong>Cantidad maximo de preguntas: </strong>{maxQuestions}</p>
+            <p><strong>Cantidad de preguntas por examen: </strong>{data.cantidadpreguntasporexamen}</p>
+            <p><strong>Cantidad máxima de preguntas: </strong>{maxQuestions}</p>
+            <p><strong>Cantidad de preguntas actuales: </strong>{preguntasLength}</p>
 
             <div className="questions-container">
 
@@ -84,15 +89,20 @@ const QuestionManagement = () => {
                     <p>No hay preguntas disponibles. Presione Agregar pregunta para crear una pregunta a su gusto, Agregar pregunta del banco para elegir una de las preguntas del banco o guarde el examen para que se asignen preguntas aleatoriamente</p>
                 )}
             </div>
-
-            {maxQuestions > preguntas.length &&
+            {estadoExamen == "Borrador" &&
                 <>
-                    <button onClick={handleAddQuestion}>Agregar pregunta</button>
-                    <button onClick={handleAddQuestionToBank}>Agregar pregunta del banco</button>
+                    {maxQuestions > preguntasLength &&
+                        <>
+                            <button onClick={handleAddQuestion}>Agregar pregunta</button>
+                            <button onClick={handleAddQuestionToBank}>Agregar pregunta del banco</button>
+                        </>
+                    }
+                    <button onClick={handleSaveQuetions}>Guardar cambios</button>
+                    {maxQuestions == preguntasLength && <button onClick={handlePublishExam}>Publicar</button>}
                 </>
-
             }
-            <button onClick={handleSaveQuetions}>Guardar Examen</button>
+
+
         </div>
     )
 }

@@ -4,7 +4,7 @@
     display: grid;
     grid-template-areas:
         "aside main main";
-    grid-template-columns: 0.3fr 1fr;
+    grid-template-columns: 15em 1fr;
     background-color: var(--backgroud-color);
 }
 

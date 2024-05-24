@@ -55,6 +55,65 @@ export const useExam = () => {
         }
     }
 
+    const createExam = async (exam) => {
+        try {
+            const response = await fetch('http://localhost:8084/examenes/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(exam),
+            })
+
+            if (response.ok) {
+                const responseData = await response.json()
+                console.log('Examen guardado exitosamente:', responseData)
+            } else {
+                console.error('Error al guardar el examen:', response.status)
+            }
+        } catch (error) {
+            console.error('Error en la solicitud:', error)
+        }
+    }
+
+    const publishExam = async (id) => {
+        try {
+            const response = await fetch(`http://localhost:8084/examenes/${id}`, {
+                method: 'PUT'
+            })
+
+            if (response.ok) {
+                const responseData = await response.json()
+                console.log('Examen publicado exitosamente:', responseData)
+            } else {
+                console.error('Error al publicar el examen:', response.status)
+            }
+        } catch (error) {
+            console.error('Error en la solicitud:', error)
+        }
+    }
+
+    const updateExam = async (id, exam) => {
+        try {
+            const response = await fetch(`http://localhost:8084/examenes/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(exam),
+            })
+
+            if (response.ok) {
+                const responseData = await response.json()
+                console.log('Examen actualizado exitosamente:', responseData)
+            } else {
+                console.error('Error al actualizar el examen:', response.status)
+            }
+        } catch (error) {
+            console.error('Error en la solicitud:', error)
+        }
+    }
+
     const handleExamClick = (exam) => {
         setSelectedExam(exam);
     }
@@ -63,5 +122,5 @@ export const useExam = () => {
         setSelectedExamToDelete(exam);
     }
 
-    return { exams, handleExamClick, deleteExam,getExamsByStudent, handleExamToDeleteClick, selectedExamToDelete, getExamsByCourse, selectedExam }
+    return { exams, handleExamClick, deleteExam, getExamsByStudent, handleExamToDeleteClick, selectedExamToDelete, publishExam, updateExam, createExam, getExamsByCourse, selectedExam }
 }
