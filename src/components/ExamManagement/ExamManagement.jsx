@@ -9,6 +9,7 @@ const ExamManagement = () => {
     const navigate = useNavigate()
     const { state } = useLocation()
     const { selectedCourse, selectedExam } = state
+    const stateExam = selectedExam.estado
 
     const [formData, setFormData] = useState(selectedExam || {
         titulo: "",
@@ -72,6 +73,7 @@ const ExamManagement = () => {
                     placeholder="Titulo del examen"
                     value={formData.titulo}
                     onChange={handleInputChange}
+                    disabled={stateExam == "Publicado"}
                 />
                 <label>Fecha</label>
                 <input
@@ -79,6 +81,8 @@ const ExamManagement = () => {
                     name="fecha"
                     value={formData.fecha}
                     onChange={handleInputChange}
+                    disabled={stateExam == "Publicado"}
+
                 />
                 <label>Duracion</label>
                 <input
@@ -87,6 +91,7 @@ const ExamManagement = () => {
                     placeholder="Duracion del examen en minutos"
                     value={formData.duracionexamen}
                     onChange={handleInputChange}
+                    disabled={stateExam == "Publicado"}
                 />
                 <label>Cantidad total de preguntas</label>
                 <input
@@ -95,6 +100,8 @@ const ExamManagement = () => {
                     placeholder="Cantidad de preguntas totales"
                     value={formData.cantidadpreguntas}
                     onChange={handleInputChange}
+                    disabled={stateExam == "Publicado"}
+
                 />
                 <label>Cantidad de preguntas por estudiante</label>
                 <input
@@ -103,6 +110,7 @@ const ExamManagement = () => {
                     placeholder="Cantidad de preguntas por estudiante"
                     value={formData.cantidadpreguntasporexamen}
                     onChange={handleInputChange}
+                    disabled={stateExam == "Publicado"}
                 />
                 <label>Calificación máxima</label>
                 <input
@@ -111,6 +119,7 @@ const ExamManagement = () => {
                     placeholder="Calificación máxima"
                     value={formData.calificacion}
                     onChange={handleInputChange}
+                    disabled={stateExam == "Publicado"}
                 />
 
                 <label>Calificación para aprobar</label>
@@ -120,6 +129,7 @@ const ExamManagement = () => {
                     placeholder="Calificación mínima para aprobar"
                     value={formData.notaParaAprobar}
                     onChange={handleInputChange}
+                    disabled={stateExam == "Publicado"}
                 />
                 <label>Hora inicio</label>
                 <input
@@ -127,6 +137,7 @@ const ExamManagement = () => {
                     name="horaInicio"
                     value={formData.horaInicio}
                     onChange={handleInputChange}
+                    disabled={stateExam == "Publicado"}
                 />
                 <label>Hora fin</label>
                 <input
@@ -134,6 +145,7 @@ const ExamManagement = () => {
                     name="horaFin"
                     value={formData.horaFin}
                     onChange={handleInputChange}
+                    disabled={stateExam == "Publicado"}
                 />
 
                 <div className="combobox">
@@ -143,8 +155,9 @@ const ExamManagement = () => {
                         onChange={handleChangeTopic}
                         defaultValue={selectedTopic}
                         firstOption="Seleccione un tema"
-                        disabled={selectedCourse != "" ? false : true}
+                        disabled={stateExam ? stateExam == "Publicado" : selectedCourse != "" ? false : true}
                         elementValue={"nombre"}
+                        
 
                     />
                 </div>

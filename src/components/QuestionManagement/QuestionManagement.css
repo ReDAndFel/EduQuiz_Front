@@ -1,14 +1,25 @@
-.question-management-container{
+.question-management-container {
     display: flex;
     flex-direction: column;
     gap: 1em;
     overflow-y: auto;
+    padding: 1em;
 }
 
-.question-card ol{
+.question-card ol {
     margin-left: 2em;
 }
 
-.questions-container{
+.question-card {
+    margin-bottom: 1em;
+}
+
+.questions-container {
     margin-left: 2em;
+}
+
+.questions-list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
 }

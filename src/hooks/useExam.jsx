@@ -4,6 +4,8 @@ export const useExam = () => {
     const [exams, setExams] = useState([])
     const [selectedExam, setSelectedExam] = useState()
     const [selectedExamToDelete, setSelectedExamToDelete] = useState()
+    const [selectedExamToPublish, setSelectedExamToPublish] = useState()
+
 
     const getExamsByStudent = async (id) => {
         try {
@@ -78,15 +80,14 @@ export const useExam = () => {
 
     const publishExam = async (id) => {
         try {
-            const response = await fetch(`http://localhost:8084/examenes/${id}`, {
+            const response = await fetch(`http://localhost:8084/examenes/publish/${id}`, {
                 method: 'PUT'
             })
-
+            const responseData = await response.json()
             if (response.ok) {
-                const responseData = await response.json()
                 console.log('Examen publicado exitosamente:', responseData)
             } else {
-                console.error('Error al publicar el examen:', response.status)
+                console.error('Error al publicar el examen:', responseData)
             }
         } catch (error) {
             console.error('Error en la solicitud:', error)
@@ -122,5 +123,9 @@ export const useExam = () => {
         setSelectedExamToDelete(exam);
     }
 
-    return { exams, handleExamClick, deleteExam, getExamsByStudent, handleExamToDeleteClick, selectedExamToDelete, publishExam, updateExam, createExam, getExamsByCourse, selectedExam }
+    const handleExamToPublishClick = (exam) => {
+        setSelectedExamToPublish(exam);
+    }
+
+    return { exams, handleExamClick, deleteExam, getExamsByStudent, handleExamToPublishClick, selectedExamToPublish, handleExamToDeleteClick, selectedExamToDelete, publishExam, updateExam, createExam, getExamsByCourse, selectedExam }
 }

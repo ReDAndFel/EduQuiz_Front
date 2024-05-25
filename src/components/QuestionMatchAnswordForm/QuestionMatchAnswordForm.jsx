@@ -25,7 +25,7 @@ const QuestionMatchAnswordForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        const newQuestion = { "enunciado": statement, "respuestas": answers, "idTema": data.idTema, "idEstado": selectedState.id, "peso": weight, idTipoPregunta: selectedQuestionType.id }
+        const newQuestion = { "enunciado": statement, "respuestas": answers, "idTema": data.idTema, "idEstado": selectedState.id, "peso": weight, "idTipoPregunta": selectedQuestionType.id }
         const updateForm = {
             ...data,
             preguntas: [...(data.preguntas || []), newQuestion],
