@@ -1,0 +1,10 @@
+.delete-icon {
+    width: 1.3em;
+    align-self: flex-start;
+    background: none;
+    border: none;
+}
+
+.delete-icon:hover {
+    cursor: pointer;
+}

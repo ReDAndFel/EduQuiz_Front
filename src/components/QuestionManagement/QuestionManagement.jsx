@@ -1,8 +1,9 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import "./QuestionManagement.css"
 import { useLocation, useNavigate } from "react-router-dom"
 import { useExam } from "../../hooks/useExam"
 import ConfirmationModal from "../ConfirmationModal/ConfirmationModal"
+import DeleteButton from "../DeleteButton/DeleteButton"
 
 const QuestionManagement = () => {
 
@@ -12,12 +13,17 @@ const QuestionManagement = () => {
     const [data, setData] = useState(updateForm)
     const maxQuestions = data.cantidadpreguntas
     const [preguntas, setPreguntas] = useState(data.preguntas || [])
+    const [preguntaSeleccionada, setPreguntaSeleccionada] = useState()
+
     const [preguntasLength, setPreguntasLength] = useState(preguntas.length)
     const estadoExamen = data.estado
-    const { createExam, updateExam, handleExamToPublishClick, publishExam, selectedExamToPublish} = useExam()
+    const { createExam, updateExam, handleExamToPublishClick, publishExam, selectedExamToPublish } = useExam()
     const [isModalPublishOpen, setModalPublishOpen] = useState(false)
     const openModalPublish = () => setModalPublishOpen(true)
     const closeModalPublish = () => setModalPublishOpen(false)
+    const [isModalDeleteOpen, setModalDeleteOpen] = useState(false)
+    const openModalDelete = () => setModalDeleteOpen(true)
+    const closeModalDelete = () => setModalDeleteOpen(false)
 
     const handleAddQuestion = () => {
         navigate('/tipo-pregunta', { state: { data } })
@@ -55,6 +61,24 @@ const QuestionManagement = () => {
 
     }
 
+    const handleClickDeleteQuestion = async (question) => {
+        console.log("Pregunta a eliminar:")
+        console.log(question)
+        setPreguntaSeleccionada(question)
+        openModalDelete()
+
+    }
+
+    const handleDeleteQuestion = () => {
+        const updatedQuestions = preguntas.filter(question => question !== preguntaSeleccionada)
+        setPreguntas(updatedQuestions)
+        closeModalDelete();
+    }
+
+    useEffect(() => {
+        if (preguntas) setPreguntasLength(preguntas.length)
+    }, [preguntas])
+
     return (
         <div className="question-management-container">
             <h2>Crear preguntas del examen</h2>
@@ -72,9 +96,10 @@ const QuestionManagement = () => {
 
                 {preguntasLength > 0 ? (
                     <div className="questions-list-container">
-                        <ol type="1">
-                            {preguntas.map((question, index) => (
-                                <li key={index} className="question-card">
+
+                        {preguntas.map((question, index) => (
+                            <div key={index} className="question-card">
+                                <div className="question-content">
                                     <label>{question.enunciado}</label>
                                     <ol type="A">
                                         {question.respuestas.map((answer, answerIndex) => (
@@ -83,11 +108,13 @@ const QuestionManagement = () => {
                                             </li>
                                         ))}
                                     </ol>
-                                </li>
-                            ))}
-                        </ol>
+                                </div>
+                                {estadoExamen == "Borrador" && <DeleteButton handleClick={() => handleClickDeleteQuestion(question)} />}
+                            </div>
+                        ))}
+
                         {preguntasLength < maxQuestions && <p>Aun quedan {maxQuestions - preguntasLength} pregunta(s) por agregar, siga agregando preguntas o guarde los cambios para que se asignen las preguntas restante automaticamente.</p>
-                        }                    
+                        }
                     </div>
 
 
@@ -103,8 +130,8 @@ const QuestionManagement = () => {
                             <button onClick={handleAddQuestionToBank}>Agregar pregunta del banco</button>
                         </>
                     }
-                   { preguntasLength <= maxQuestions && <button onClick={handleSaveQuetions}>Guardar cambios</button>}
-                   {preguntasLength > maxQuestions && "Debe eliminar preguntas ya que excedio la cantidad de preguntas o devuelvase y cambie la cantidad de preguntas a una mayor."}
+                    {preguntasLength <= maxQuestions && <button onClick={handleSaveQuetions}>Guardar cambios</button>}
+                    {preguntasLength > maxQuestions && "Debe eliminar preguntas ya que excedio la cantidad de preguntas o devuelvase y cambie la cantidad de preguntas a una mayor."}
                     {maxQuestions == preguntasLength && <button onClick={handleClickPublish}>Publicar</button>}
                 </>
             }
@@ -113,6 +140,13 @@ const QuestionManagement = () => {
                 isOpen={isModalPublishOpen}
                 onClose={closeModalPublish}
                 onConfirm={handlePublishExam}
+            />
+
+            <ConfirmationModal
+                questionConfirm={"¿Seguro que desea eliminar la pregunta?"}
+                isOpen={isModalDeleteOpen}
+                onClose={closeModalDelete}
+                onConfirm={handleDeleteQuestion}
             />
 
         </div>
