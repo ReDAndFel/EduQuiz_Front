@@ -3,6 +3,7 @@ import "./QuestionUniqueAnswordForm.css"
 import { useLocation, useNavigate } from "react-router-dom"
 import SelectComponent from "../SelectComponent/SelectComponent"
 import { useStateQuestion } from "../../hooks/useStateQuestion"
+import DeleteButton from "../DeleteButton/DeleteButton"
 
 const QuestionUniqueAnswordForm = () => {
     const [statement, setStatement] = useState("")
@@ -40,6 +41,10 @@ const QuestionUniqueAnswordForm = () => {
         }
         navigate("/preguntas", { state: { updateForm } })
     }
+    const handleClickDelete = (answerDeleted) => {
+        const updatedAnwers = answers.filter(answer => answer != answerDeleted)
+        setAnswers(updatedAnwers)
+    }
 
     return (
         <form className="form-question-unique-answord" onSubmit={handleSubmit}>
@@ -61,39 +66,41 @@ const QuestionUniqueAnswordForm = () => {
             />
             {answers.map((answer, index) => (
                 <div className="answer-container" key={index}>
-                    <label>Respuesta</label>
-                    <input
-                        type="text"
-                        placeholder={"Ingrese la respuesta"}
-                        value={answer.opcionrespuesta}
-                        onChange={(e) => handleAnswerChange(index, "opcionrespuesta", e.target.value)}
-                    />
-                    <label>Valor</label>
-                    <label>
+                    <div className="answer-content">
+                        <label>Respuesta</label>
                         <input
-                            type="radio"
-                            name={`correcta-${index}`}
-                            value="Correcta"
-                            checked={answer.correcta === "Correcta"}
-                            onChange={(e) =>
-                                handleAnswerChange(index, "correcta", e.target.value)
-                            }
+                            type="text"
+                            placeholder={"Ingrese la respuesta"}
+                            value={answer.opcionrespuesta}
+                            onChange={(e) => handleAnswerChange(index, "opcionrespuesta", e.target.value)}
                         />
-                        Correcta
-                    </label>
-                    <label>
-                        <input
-                            type="radio"
-                            name={`correcta-${index}`}
-                            value="Incorrecta"
-                            checked={answer.correcta === "Incorrecta"}
-                            onChange={(e) =>
-                                handleAnswerChange(index, "correcta", e.target.value)
-                            }
-                        />
-                        Incorrecta
-                    </label>
-
+                        <label>Valor</label>
+                        <label>
+                            <input
+                                type="radio"
+                                name={`correcta-${index}`}
+                                value="Correcta"
+                                checked={answer.correcta === "Correcta"}
+                                onChange={(e) =>
+                                    handleAnswerChange(index, "correcta", e.target.value)
+                                }
+                            />
+                            Correcta
+                        </label>
+                        <label>
+                            <input
+                                type="radio"
+                                name={`correcta-${index}`}
+                                value="Incorrecta"
+                                checked={answer.correcta === "Incorrecta"}
+                                onChange={(e) =>
+                                    handleAnswerChange(index, "correcta", e.target.value)
+                                }
+                            />
+                            Incorrecta
+                        </label>
+                    </div>
+                    {answers.length > 1 && <DeleteButton handleClick={() => handleClickDelete(answer)} />}
                 </div>
             ))}
             <label>Privacidad</label>

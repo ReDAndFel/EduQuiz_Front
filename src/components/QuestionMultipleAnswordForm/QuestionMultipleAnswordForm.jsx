@@ -3,6 +3,7 @@ import "./QuestionMultipleAnswordForm.css"
 import { useLocation, useNavigate } from "react-router-dom"
 import SelectComponent from "../SelectComponent/SelectComponent"
 import { useStateQuestion } from "../../hooks/useStateQuestion"
+import DeleteButton from "../DeleteButton/DeleteButton"
 
 const QuestionMultipleAnswordForm = () => {
     const [statement, setStatement] = useState("")
@@ -32,6 +33,11 @@ const QuestionMultipleAnswordForm = () => {
         }
         navigate("/preguntas", { state: { updateForm } })
     }
+    
+    const handleClickDelete = (answerDeleted) =>{
+        const updatedAnwers = answers.filter(answer => answer != answerDeleted)
+        setAnswers(updatedAnwers)
+    }
 
     return (
         <form className="form-question-unique-answord" onSubmit={handleSubmit}>
@@ -53,6 +59,7 @@ const QuestionMultipleAnswordForm = () => {
             />
             {answers.map((answer, index) => (
                 <div className="answer-container" key={index}>
+                    <div className="answer-content">
                     <label>Respuesta</label>
                     <input
                         type="text"
@@ -85,6 +92,8 @@ const QuestionMultipleAnswordForm = () => {
                         />
                         Incorrecta
                     </label>
+                    </div>
+                    {answers.length > 1 && <DeleteButton handleClick={()=>handleClickDelete(answer)}/>}
 
                 </div>
             ))}

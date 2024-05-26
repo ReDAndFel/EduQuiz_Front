@@ -95,6 +95,8 @@ export const useExam = () => {
     }
 
     const updateExam = async (id, exam) => {
+        console.log("examen mandado a actualizar:")
+        console.log(exam)
         try {
             const response = await fetch(`http://localhost:8084/examenes/${id}`, {
                 method: 'PUT',

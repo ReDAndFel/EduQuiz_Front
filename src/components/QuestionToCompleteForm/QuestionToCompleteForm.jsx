@@ -3,6 +3,7 @@ import "./QuestionToCompleteForm.css"
 import { useLocation, useNavigate } from "react-router-dom"
 import SelectComponent from "../SelectComponent/SelectComponent"
 import { useStateQuestion } from "../../hooks/useStateQuestion"
+import DeleteButton from "../DeleteButton/DeleteButton"
 
 const QuestionToCompleteForm = () => {
     const [statement, setStatement] = useState("")
@@ -29,6 +30,12 @@ const QuestionToCompleteForm = () => {
         navigate("/preguntas", { state: { updateForm } })
     }
 
+    const handleClickDelete = (answerDeleted) => {
+        const updatedAnwers = answers.filter(answer => answer != answerDeleted)
+        setAnswers(updatedAnwers)
+    }
+
+
     return (
         <form className="form-question-unique-answord" onSubmit={handleSubmit}>
             <h1>Crear pregunta de completar </h1>
@@ -49,14 +56,18 @@ const QuestionToCompleteForm = () => {
             />
             {answers.map((answer, index) => (
                 <div className="answer-container" key={index}>
-                    <label>Respuesta</label>
-                    <textarea
-                        type="text"
-                        placeholder={"Ingrese la respuesta"}
-                        value={answer.opcionrespuesta}
-                        onChange={(e) => handleAnswerChange(index, "opcionrespuesta", e.target.value)}
-                    />
+                    <div className="answer-content">
+                        <label>Respuesta</label>
+                        <textarea
+                            type="text"
+                            placeholder={"Ingrese la respuesta"}
+                            value={answer.opcionrespuesta}
+                            onChange={(e) => handleAnswerChange(index, "opcionrespuesta", e.target.value)}
+                        />
+                    </div>
+                    {answers.length > 1 && <DeleteButton handleClick={() => handleClickDelete(answer)} />}
                 </div>
+
             ))}
 
             <label>Privacidad</label>

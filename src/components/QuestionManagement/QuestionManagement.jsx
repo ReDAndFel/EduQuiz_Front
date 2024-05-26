@@ -35,14 +35,16 @@ const QuestionManagement = () => {
 
 
     const handleSaveQuetions = async () => {
-        console.log("Data definitiva de examen:")
-        console.log(data)
         if (data.id) {
             console.log("Examen a actualizar")
+            console.log(data)
+
             await updateExam(data.id, data)
         } else {
             console.log("Examen a crear")
-            await createExam(data)
+            console.log(updateData)
+
+            await createExam(updateData)
         }
         navigate("/gestionar-examenes")
 
@@ -70,13 +72,15 @@ const QuestionManagement = () => {
     }
 
     const handleDeleteQuestion = () => {
-        const updatedQuestions = preguntas.filter(question => question !== preguntaSeleccionada)
+        const updatedQuestions = preguntas.filter(question => question.id !== preguntaSeleccionada.id);
         setPreguntas(updatedQuestions)
         closeModalDelete();
     }
 
     useEffect(() => {
         if (preguntas) setPreguntasLength(preguntas.length)
+        const updateData = { ...data, "preguntas":preguntas }
+        setData(updateData)
     }, [preguntas])
 
     return (

@@ -5,12 +5,17 @@
     overflow-y: scroll;
     padding: 1em;
 }
-
 .answer-container{
     display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.answer-content{
+    display: flex;
+    width: 90%;
     flex-direction: column;
     padding: 1em;
     gap: 0.5em;
-    border: 1px solid var(--font-color);
     border-radius: 0.4em;
 }
