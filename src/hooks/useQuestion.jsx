@@ -4,6 +4,7 @@ export const useQuestion = () => {
 
     const [questions, setQuestions] = useState([])
     const [selectedQuestion, setSelectedQuestion] = useState({})
+    const [question, setQuestion] = useState()
 
     const getQuestionByExamIdAndIdStudent = async (idExam, idStudent) => {
         try {
@@ -21,6 +22,20 @@ export const useQuestion = () => {
             console.error('Error al obtener las preguntas por examen:', error)
         }
     }
+
+    const getQuestionByid = async (idQuestion) => {
+        try {
+            const respuesta = await fetch(`http://localhost:8084/preguntas/${idQuestion}`)
+            if (!respuesta.ok) {
+                throw new Error('No se pudo completar la solicitud')
+            }
+            const data = await respuesta.json()
+            setQuestion(data.response)
+        } catch (error) {
+            console.error('Error al obtener las preguntas por examen:', error)
+        }
+    }
+
 
     const getQuestionByTopicId = async (idTopic) => {
         try {
@@ -45,5 +60,5 @@ export const useQuestion = () => {
         setSelectedQuestion(selectedQuestion)
     }
 
-    return { questions, handleQuestionClick, getQuestionByExamIdAndIdStudent, getQuestionByTopicId, selectedQuestion }
+    return { questions, getQuestionByid,handleQuestionClick, getQuestionByExamIdAndIdStudent, getQuestionByTopicId, selectedQuestion }
 }

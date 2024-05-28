@@ -1,6 +1,8 @@
 import { useLocation } from "react-router-dom"
 import "./Exam.css"
 import { useQuestion } from "../../hooks/useQuestion"
+import { useAsignQuestion } from "../../hooks/useAsignQuestion"
+import { useAsignStudent } from "../../hooks/useAsignStudent"
 import { useEffect, useState } from "react"
 import { useAnswer } from "../../hooks/useAnswer"
 import QuestionCard from "../QuestionCard/QuestionCard"
@@ -8,24 +10,25 @@ import QuestionCard from "../QuestionCard/QuestionCard"
 const Exam = () => {
     const { state } = useLocation()
     const { selectedExam, selectedStudent } = state
-    const { questions, handleQuestionClick, getQuestionByExamIdAndIdStudent, selectedQuestion } = useQuestion()
-    const { answers, handleAnswerClick, getAnswerByIdQuestion, selectedAnswer } = useAnswer()
+    const { question, getQuestionByid } = useQuestion()
+    const {getAsignQuestionByIdAsignStudent, listAsignQuestion} = useAsignQuestion()
+    const {getAsignStudentByIdStudentAndIdExam, asignStudent} = useAsignStudent()
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
     const [currentQuestion, setCurrentQuestion] = useState({})
-    const questionsLength = questions.length
+    const listAsignQuestionLength = listAsignQuestion.length
     const [selectedAnswers, setSelectedAnswers] = useState({})
     const [data, setData] = useState([])
 
 
     useEffect(() => {
-        getQuestionByExamIdAndIdStudent(selectedExam.id, selectedStudent.id)
+        getAsignStudentByIdStudentAndIdExam(selectedStudent.id, selectedExam.id)
     }, [])
 
     useEffect(() => {
-        if (selectedStudent && selectedExam) {
-            getAsignStudentByIdStudentAndIdExam(selectedStudent.id, selectedExam.id)
+        if (asignStudent) {
+            getAsignQuestionByIdAsignStudent(asignStudent.id)
         }
-    }, [selectedStudent])
+    }, [asignStudent])
 
     useEffect(() => {
         console.log("data:")
@@ -54,13 +57,13 @@ const Exam = () => {
     }
 
     useEffect(() => {
-        if (questionsLength > 0) {
+        if (listAsignQuestionLength > 0) {
             console.log("Pregunta anterior:")
             console.log(currentQuestion)
-            setCurrentQuestion(questions[currentQuestionIndex])
-            getAnswerByIdQuestion(questions[currentQuestionIndex][0].id)
+            setCurrentQuestion(listAsignQuestionLength[currentQuestionIndex])
+            getAnswerByIdQuestion(listAsignQuestionLength[currentQuestionIndex][0].id)
         }
-    }, [currentQuestionIndex, questions])
+    }, [currentQuestionIndex, listAsignQuestionLength])
 
     return (
         <div className="exam-container">

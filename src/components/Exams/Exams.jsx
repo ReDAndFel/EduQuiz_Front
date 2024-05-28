@@ -10,7 +10,7 @@ import { useEffect } from "react"
 const Exams = () => {
     const { universities, handleChangeUniversity, selectedUniversity } = useInstitution()
     const { courses, getCourses, handleChangeCourse, selectedCourse } = useCourse()
-    const { exams, handleExamClick, getExamsByCourse, selectedExam } = useExam()
+    const { exams, handleExamClick, getExamsPublicByCourse, selectedExam } = useExam()
     const examsLength = exams.length
     const navigate = useNavigate()
 
@@ -20,7 +20,7 @@ const Exams = () => {
 
     useEffect(() => {
         if(selectedCourse) {
-            getExamsByCourse(selectedCourse.id)
+            getExamsPublicByCourse(selectedCourse.id)
         }
     }, [selectedCourse])
 

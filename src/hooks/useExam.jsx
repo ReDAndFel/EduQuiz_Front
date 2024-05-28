@@ -41,6 +41,23 @@ export const useExam = () => {
         }
     }
 
+    const getExamsPublicByCourse = async (id) => {
+        try {
+            const respuesta = await fetch(`http://localhost:8084/examenes/curso/publico/${id}`)
+            if (!respuesta.ok) {
+                throw new Error('No se pudo completar la solicitud')
+            }
+            const data = await respuesta.json()
+            if (Array.isArray(data.response)) {
+                setExams(data.response)
+            } else {
+                console.error('La respuesta no contiene un array de examenes por curso:', data)
+            }
+        } catch (error) {
+            console.error('Error al obtener los examenes por curso:', error)
+        }
+    }
+
     const deleteExam = async (id) => {
         try {
             const respuesta = await fetch(`http://localhost:8084/examenes/${id}`, {
@@ -129,5 +146,5 @@ export const useExam = () => {
         setSelectedExamToPublish(exam);
     }
 
-    return { exams, handleExamClick, deleteExam, getExamsByStudent, handleExamToPublishClick, selectedExamToPublish, handleExamToDeleteClick, selectedExamToDelete, publishExam, updateExam, createExam, getExamsByCourse, selectedExam }
+    return { exams, handleExamClick, deleteExam, getExamsPublicByCourse,getExamsByStudent, handleExamToPublishClick, selectedExamToPublish, handleExamToDeleteClick, selectedExamToDelete, publishExam, updateExam, createExam, getExamsByCourse, selectedExam }
 }
