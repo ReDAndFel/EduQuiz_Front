@@ -2,7 +2,7 @@ import "./SelectComponent.css"
 
 const SelectComponent = ({ list, onChange, defaultValue, firstOption, disabled,elementValue }) => {
     return (
-        <select value={defaultValue.id} onChange={onChange} disabled={disabled} >
+        <select value={ defaultValue ? defaultValue.id : ""} onChange={onChange} disabled={disabled} >
             <option value="">{firstOption}</option>
             {list.map((element) => (
                 <option key={element.id} value={element.id}>

@@ -9,7 +9,6 @@ const ExamManagement = () => {
     const navigate = useNavigate()
     const { state } = useLocation()
     const { selectedCourse, selectedExam } = state
-    const stateExam = selectedExam.estado
 
     const [formData, setFormData] = useState(selectedExam || {
         titulo: "",
@@ -26,6 +25,8 @@ const ExamManagement = () => {
         estado: "Borrador",
         preguntas: []
     })
+
+    const stateExam = formData.estado
 
 
     useEffect(() => {

@@ -7,7 +7,7 @@ import QuestionCard from "../QuestionCard/QuestionCard"
 
 const Exam = () => {
     const { state } = useLocation()
-    const { selectedStudent, selectedExam } = state || {}
+    const { selectedExam, selectedStudent } = state
     const { questions, handleQuestionClick, getQuestionByExamIdAndIdStudent, selectedQuestion } = useQuestion()
     const { answers, handleAnswerClick, getAnswerByIdQuestion, selectedAnswer } = useAnswer()
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
@@ -22,6 +22,12 @@ const Exam = () => {
     }, [])
 
     useEffect(() => {
+        if (selectedStudent && selectedExam) {
+            getAsignStudentByIdStudentAndIdExam(selectedStudent.id, selectedExam.id)
+        }
+    }, [selectedStudent])
+
+    useEffect(() => {
         console.log("data:")
 
         console.log(data)
@@ -31,7 +37,7 @@ const Exam = () => {
         const newResponses = Object.values(selectedAnswers).filter(response => {
             return !data.some(existingResponse => existingResponse.idRespuesta === response.idRespuesta)
         })
-    
+
         const updatedData = [...data, ...newResponses]
         setData(updatedData)
         setCurrentQuestionIndex((prevIndex) => prevIndex + 1)
@@ -41,7 +47,7 @@ const Exam = () => {
         const newResponses = Object.values(selectedAnswers).filter(response => {
             return !data.some(existingResponse => existingResponse.idRespuesta === response.idRespuesta)
         })
-    
+
         const updatedData = [...data, ...newResponses]
         setData(updatedData)
         console.log("Examen finalizado")
@@ -60,7 +66,6 @@ const Exam = () => {
         <div className="exam-container">
             <h2>Titulo: {selectedExam.titulo}</h2>
             <h3>Estudiante: {selectedStudent.nombre}</h3>
-            <h3>Curso: {selectedStudent.idcurso.nombrecurso}</h3>
             {currentQuestion && (
                 <div className="question-container">
                     <label>Pregunta {currentQuestionIndex + 1} de {questionsLength}</label>

@@ -2,7 +2,7 @@ import { useState } from "react"
 export const useStudent = () => {
 
     const [listStudents, setListStudents] = useState([])
-    const [selectedStudent, setSelectedStudent] = useState([])
+    const [selectedStudent, setSelectedStudent] = useState()
 
     const getStudentsByIdCourse = async (idCourse) => {
         try {

@@ -42,9 +42,9 @@ const QuestionManagement = () => {
             await updateExam(data.id, data)
         } else {
             console.log("Examen a crear")
-            console.log(updateData)
+            console.log(data)
 
-            await createExam(updateData)
+            await createExam(data)
         }
         navigate("/gestionar-examenes")
 

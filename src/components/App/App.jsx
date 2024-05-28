@@ -14,6 +14,7 @@ import QuestionMatchAnswordForm from '../QuestionMatchAnswordForm/QuestionMatchA
 import Exam from '../Exam/Exam'
 import BankQuestions from '../BankQuestions/BankQuestions'
 import ExamsCourse from '../ExamsCourse/ExamsCourse'
+import PreExam from '../PreExam/PreExam'
 
 function App() {
   return (
@@ -36,7 +37,9 @@ function App() {
         <Route path="/agregar-pregunta-Emparejar" element={<QuestionMatchAnswordForm />} />
         <Route path="/tipo-pregunta" element={<QuestionType />} />
         <Route path="/banco-preguntas" element={<BankQuestions />} />
+        <Route path="/preexamen" element={<PreExam />} />
         <Route path="/examen" element={<Exam />} />
+
 
       </Routes>
 

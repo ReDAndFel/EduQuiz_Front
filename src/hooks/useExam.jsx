@@ -9,7 +9,7 @@ export const useExam = () => {
 
     const getExamsByStudent = async (id) => {
         try {
-            const respuesta = await fetch(`http://localhost:8084/examenes/estudiante/${id}`)
+            const respuesta = await fetch(`http://localhost:8084/examenes/curso/${id}`)
             if (!respuesta.ok) {
                 throw new Error('No se pudo completar la solicitud')
             }
